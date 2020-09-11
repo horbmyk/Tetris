@@ -12,7 +12,6 @@ class Horizontal : StateBlockTetris
         cells[2] = c_2;
         cells[3] = c_3;
         Casper();
-
     }
     public override void Left()
     {
@@ -287,11 +286,10 @@ class Vertical : StateBlockTetris
         cells[2] = c_2;
         cells[3] = c_3;
         Casper();
+        //CommonData.timestep = 0;
     }
     public override void Left()
     {
-
-        //  CommonData.timestep_Go = false;//в if
         if (cells[0].Y - 1 >= 0
             && CommonData.CommonArr[cells[0].X, cells[0].Y - 1] <= 0
             && CommonData.CommonArr[cells[1].X, cells[1].Y - 1] <= 0
@@ -306,11 +304,11 @@ class Vertical : StateBlockTetris
             }
             Casper();
             CommonData.timestep = 0;
+            CommonData.timestep_Go = false;
         }
     }
     public override void Right()
     {
-       //CommonData.timestep_Go = false;//в if
         if (cells[0].Y + 1 < CommonData.Lenght
             && CommonData.CommonArr[cells[0].X, cells[0].Y + 1] <= 0
             && CommonData.CommonArr[cells[1].X, cells[1].Y + 1] <= 0
@@ -325,12 +323,11 @@ class Vertical : StateBlockTetris
             }
             Casper();
             CommonData.timestep = 0;
+            CommonData.timestep_Go = false;
         }
     }
     public override void DownAuto(BlockController bc)
     {
-       // CommonData.timestep = 0;
-        //CommonData.timestep_Go = true;//в if
         CommonData.ResetCasper();
         if (cells[3].X == CommonData.Height - 1
            || CommonData.CommonArr[cells[3].X + 1, cells[3].Y] > 0)
@@ -340,12 +337,7 @@ class Vertical : StateBlockTetris
                 bc.GameOverPrint();
                 CommonData.Play = false;
             }
-            //if (CommonData.Play)
-            //{
-            //    Debug.Log("up");
-            //    NextElement nextElement = new NextElement();
-            //    bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
-            //}
+            CommonData.timestep_Go = true;
         }
 
         if (cells[3].X < CommonData.Height - 1
@@ -364,13 +356,8 @@ class Vertical : StateBlockTetris
             if (cells[3].X == CommonData.Height - 1
                  || CommonData.CommonArr[cells[3].X + 1, cells[3].Y] > 0)
             {
-                Debug.Log("YES");
                 CommonData.timestep = 0;
                 CommonData.timestep_Go = true;
-                //bc.EnableLineAndCompress();
-                //NextElement nextElement = new NextElement();
-                //bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
-
             }
         }
     }
@@ -385,12 +372,6 @@ class Vertical : StateBlockTetris
                 bc.GameOverPrint();
                 CommonData.Play = false;
             }
-            //if (CommonData.Play)
-            //{
-            //    Debug.Log("up");
-            //    NextElement nextElement = new NextElement();
-            //    bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
-            //}
         }
 
         {
@@ -612,6 +593,7 @@ class Vertical : StateBlockTetris
             Cell c_3 = new Cell(cells[3].X, cells[3].Y, 1);
             Horizontal horizontal = new Horizontal(c_0, c_1, c_2, c_3);
             bc.stateBlockTetris = horizontal;
+
         }
     }
     void Casper()

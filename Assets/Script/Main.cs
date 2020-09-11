@@ -307,7 +307,6 @@ public class Main : MonoBehaviour
         CommonData.Logo = Game_Over_Logo;
         CommonData.Logo.SetActive(false);
         CommonData.Play = true;
-        CommonData.timestep = 0;
         CommonData.timestep_Go = false;
         CommonData.CommonArr = new int[CommonData.Height, CommonData.Lenght];
         for (int i = 0; i < CommonData.Height; i++)
@@ -332,11 +331,10 @@ public class Main : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(CommonData.timestep);
+        
         if (Input.GetKeyDown(KeyCode.N))
         {
-            CommonData.timestep = 0;
-            Debug.Log("timestepActive");
+            CommonData.timestep = 0f;
             CommonData.timestep_Go = true;
         }
         if (CommonData.timestep >= 1f && CommonData.timestep_Go)
