@@ -53,8 +53,8 @@ class Element_six_State_1 : StateBlockTetris
         {
             if (cells[3].X == 0)
             {
-                CommonData.Play = false;
                 bc.GameOverPrint();
+                CommonData.Play = false;
             }
             if (CommonData.Play)
             {
@@ -99,8 +99,8 @@ class Element_six_State_1 : StateBlockTetris
         {
             if (cells[3].X == 0)
             {
-                CommonData.Play = false;
                 bc.GameOverPrint();
+                CommonData.Play = false;
             }
             if (CommonData.Play)
             {
@@ -267,8 +267,8 @@ class Element_six_State_2 : StateBlockTetris
         {
             if (cells[0].X == 0)
             {
-                CommonData.Play = false;
                 bc.GameOverPrint();
+                CommonData.Play = false;
             }
             if (CommonData.Play)
             {
@@ -309,8 +309,8 @@ class Element_six_State_2 : StateBlockTetris
         {
             if (cells[0].X == 0)
             {
-                CommonData.Play = false;
                 bc.GameOverPrint();
+                CommonData.Play = false;
             }
             if (CommonData.Play)
             {

@@ -12,6 +12,7 @@ class Horizontal : StateBlockTetris
         cells[2] = c_2;
         cells[3] = c_3;
         Casper();
+
     }
     public override void Left()
     {
@@ -49,8 +50,10 @@ class Horizontal : StateBlockTetris
         {
             if (cells[0].X == 0)
             {
-                CommonData.Play = false;
                 bc.GameOverPrint();
+                CommonData.Play = false;
+
+
             }
             if (CommonData.Play)
             {
@@ -98,8 +101,9 @@ class Horizontal : StateBlockTetris
         {
             if (cells[0].X == 0)
             {
-                CommonData.Play = false;
                 bc.GameOverPrint();
+                CommonData.Play = false;
+
             }
             if (CommonData.Play)
             {
@@ -286,6 +290,8 @@ class Vertical : StateBlockTetris
     }
     public override void Left()
     {
+
+        //  CommonData.timestep_Go = false;//в if
         if (cells[0].Y - 1 >= 0
             && CommonData.CommonArr[cells[0].X, cells[0].Y - 1] <= 0
             && CommonData.CommonArr[cells[1].X, cells[1].Y - 1] <= 0
@@ -299,10 +305,12 @@ class Vertical : StateBlockTetris
                 cells[i].Y -= 1;
             }
             Casper();
+            CommonData.timestep = 0;
         }
     }
     public override void Right()
     {
+       //CommonData.timestep_Go = false;//в if
         if (cells[0].Y + 1 < CommonData.Lenght
             && CommonData.CommonArr[cells[0].X, cells[0].Y + 1] <= 0
             && CommonData.CommonArr[cells[1].X, cells[1].Y + 1] <= 0
@@ -316,24 +324,28 @@ class Vertical : StateBlockTetris
                 cells[i].Y += 1;
             }
             Casper();
+            CommonData.timestep = 0;
         }
     }
     public override void DownAuto(BlockController bc)
     {
+       // CommonData.timestep = 0;
+        //CommonData.timestep_Go = true;//в if
         CommonData.ResetCasper();
         if (cells[3].X == CommonData.Height - 1
            || CommonData.CommonArr[cells[3].X + 1, cells[3].Y] > 0)
         {
             if (cells[0].X == 0)
             {
-                CommonData.Play = false;
                 bc.GameOverPrint();
+                CommonData.Play = false;
             }
-            if (CommonData.Play)
-            {
-                NextElement nextElement = new NextElement();
-                bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
-            }
+            //if (CommonData.Play)
+            //{
+            //    Debug.Log("up");
+            //    NextElement nextElement = new NextElement();
+            //    bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
+            //}
         }
 
         if (cells[3].X < CommonData.Height - 1
@@ -352,12 +364,15 @@ class Vertical : StateBlockTetris
             if (cells[3].X == CommonData.Height - 1
                  || CommonData.CommonArr[cells[3].X + 1, cells[3].Y] > 0)
             {
-                bc.EnableLineAndCompress();
-                NextElement nextElement = new NextElement();
-                bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
+                Debug.Log("YES");
+                CommonData.timestep = 0;
+                CommonData.timestep_Go = true;
+                //bc.EnableLineAndCompress();
+                //NextElement nextElement = new NextElement();
+                //bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
+
             }
         }
-
     }
     public override void DownOneStep(BlockController bc)
     {
@@ -367,14 +382,15 @@ class Vertical : StateBlockTetris
         {
             if (cells[0].X == 0)
             {
-                CommonData.Play = false;
                 bc.GameOverPrint();
+                CommonData.Play = false;
             }
-            if (CommonData.Play)
-            {
-                NextElement nextElement = new NextElement();
-                bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
-            }
+            //if (CommonData.Play)
+            //{
+            //    Debug.Log("up");
+            //    NextElement nextElement = new NextElement();
+            //    bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
+            //}
         }
 
         {
@@ -400,6 +416,7 @@ class Vertical : StateBlockTetris
             bc.EnableLineAndCompress();
             NextElement nextElement = new NextElement();
             bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
+
         }
 
     }
@@ -418,7 +435,7 @@ class Vertical : StateBlockTetris
 
            && CommonData.CommonArr[cells[2].X, cells[2].Y + 1] == 0
            && CommonData.CommonArr[cells[2].X, cells[2].Y + 2] == 0
-           && CommonData.CommonArr[cells[2].X, cells[2].Y + 3] == 0   
+           && CommonData.CommonArr[cells[2].X, cells[2].Y + 3] == 0
 
            && CommonData.CommonArr[cells[3].X, cells[3].Y + 1] == 0
            && CommonData.CommonArr[cells[3].X, cells[3].Y + 2] == 0
@@ -477,8 +494,8 @@ class Vertical : StateBlockTetris
         {
 
             CommonData.CommonArr[cells[0].X + 1, cells[0].Y - 2] = CommonData.CommonArr[cells[0].X, cells[0].Y];
-            CommonData.CommonArr[cells[0].X, cells[0].Y] = 0;     
-            
+            CommonData.CommonArr[cells[0].X, cells[0].Y] = 0;
+
             CommonData.CommonArr[cells[1].X, cells[1].Y - 1] = CommonData.CommonArr[cells[0].X, cells[0].Y];
             CommonData.CommonArr[cells[1].X, cells[0].Y] = 0;
 
@@ -496,7 +513,7 @@ class Vertical : StateBlockTetris
             cells[1].Y -= 1;
 
             cells[2].X -= 1;
-       
+
             cells[3].X -= 2;
             cells[3].Y += 1;
 
@@ -528,8 +545,8 @@ class Vertical : StateBlockTetris
         {
             CommonData.CommonArr[cells[0].X + 1, cells[0].Y - 3] = CommonData.CommonArr[cells[0].X, cells[0].Y];
             CommonData.CommonArr[cells[0].X, cells[0].Y] = 0;
-            
-            CommonData.CommonArr[cells[1].X , cells[1].Y - 2] = CommonData.CommonArr[cells[0].X, cells[0].Y];
+
+            CommonData.CommonArr[cells[1].X, cells[1].Y - 2] = CommonData.CommonArr[cells[0].X, cells[0].Y];
             CommonData.CommonArr[cells[1].X, cells[0].Y] = 0;
 
 

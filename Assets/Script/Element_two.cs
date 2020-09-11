@@ -52,8 +52,8 @@ public class Element_two_State__1 : StateBlockTetris
         {
             if (cells[3].X == 0)
             {
-                CommonData.Play = false;
                 bc.GameOverPrint();
+                CommonData.Play = false;
             }
             if (CommonData.Play)
             {
@@ -95,8 +95,8 @@ public class Element_two_State__1 : StateBlockTetris
         {
             if (cells[3].X == 0)
             {
-                CommonData.Play = false;
                 bc.GameOverPrint();
+                CommonData.Play = false;
             }
             if (CommonData.Play)
             {
@@ -297,8 +297,8 @@ public class Element_two_State__2 : StateBlockTetris
         {
             if (cells[0].X == 0)
             {
-                CommonData.Play = false;
                 bc.GameOverPrint();
+                CommonData.Play = false;
 
             }
             if (CommonData.Play)
@@ -345,8 +345,8 @@ public class Element_two_State__2 : StateBlockTetris
         {
             if (cells[0].X == 0)
             {
-                CommonData.Play = false;
                 bc.GameOverPrint();
+                CommonData.Play = false;
 
             }
             if (CommonData.Play)
@@ -552,8 +552,8 @@ public class Element_two_State__3 : StateBlockTetris
         {
             if (cells[0].X == 0)
             {
-                CommonData.Play = false;
                 bc.GameOverPrint();
+                CommonData.Play = false;
 
             }
             if (CommonData.Play)
@@ -597,8 +597,8 @@ public class Element_two_State__3 : StateBlockTetris
         {
             if (cells[0].X == 0)
             {
-                CommonData.Play = false;
                 bc.GameOverPrint();
+                CommonData.Play = false;
 
             }
             if (CommonData.Play)
@@ -801,8 +801,8 @@ public class Element_two_State__4 : StateBlockTetris
         {
             if (cells[3].X == 0)
             {
-                CommonData.Play = false;
                 bc.GameOverPrint();
+                CommonData.Play = false;
 
             }
             if (CommonData.Play)
@@ -849,8 +849,8 @@ public class Element_two_State__4 : StateBlockTetris
         {
             if (cells[3].X == 0)
             {
-                CommonData.Play = false;
                 bc.GameOverPrint();
+                CommonData.Play = false;
 
             }
             if (CommonData.Play)

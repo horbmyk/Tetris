@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 // секунду  кінці на пару рухів(Coroutine)(лишній блок нового елемета внизу down )
-// Game Over logo
 // при створенні елемента провірка ма місце бо нова деталь стае на місце
-// Уровні
-//Після старта не мінять фігуру(або пустий екран)
 
 
 public class NextElement
@@ -195,13 +192,13 @@ public abstract class StateBlockTetris
 }
 public class BlockController
 {
-    public StateBlockTetris stateBlockTetris;
-    public int Line = 0;
-    public int Score = 0;
     public BlockController(StateBlockTetris sbt)
     {
         stateBlockTetris = sbt;
     }
+    public StateBlockTetris stateBlockTetris;
+    public int Line = 0;
+    public int Score = 0;
 
     public void Left()
     {
@@ -289,17 +286,8 @@ public class BlockController
     }
     public void GameOverPrint()
     {
-        for (int i = 0; i < CommonData.Height; i++)
-        {
-            for (int k = 0; k < CommonData.Lenght; k++)
-            {
-                CommonData.CommonArr[i, k] = 0;
-            }
-        }
-
+        CommonData.Logo.SetActive(true);
     }
-
-
 }
 public class Main : MonoBehaviour
 {
@@ -309,12 +297,18 @@ public class Main : MonoBehaviour
     NextElement nextElement;
     float timeCountForAvtoDown;
     float timeCountForHighSpeed;
+    float TimeLevelCount;
     public Text Line;
     public Text Score;
+    public Text Level;
     public GameObject Game_Over_Logo;
     void Start()
     {
+        CommonData.Logo = Game_Over_Logo;
+        CommonData.Logo.SetActive(false);
         CommonData.Play = true;
+        CommonData.timestep = 0;
+        CommonData.timestep_Go = false;
         CommonData.CommonArr = new int[CommonData.Height, CommonData.Lenght];
         for (int i = 0; i < CommonData.Height; i++)
         {
@@ -333,14 +327,34 @@ public class Main : MonoBehaviour
         nextElement = new NextElement();
         blockController = new BlockController(nextElement.GeneretedSBT(CommonData.hint.NumberElement));
         ResetPosition();
+        TimeLevelCount = 1;
+
     }
     void Update()
     {
+        Debug.Log(CommonData.timestep);
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            CommonData.timestep = 0;
+            Debug.Log("timestepActive");
+            CommonData.timestep_Go = true;
+        }
+        if (CommonData.timestep >= 1f && CommonData.timestep_Go)
+        {
+            blockController.EnableLineAndCompress();
+            Next_Element(blockController);
+            ResetPosition();
+            CommonData.timestep_Go = false;
+        }
+
+
+
+        CommonData.timestep += Time.deltaTime;
         timeCountForHighSpeed += Time.deltaTime;
         timeCountForAvtoDown += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.S))
+        //if (Input.GetKeyDown(KeyCode.S))
 
-        //  if (timeCountForAvtoDown > 1 && CommonData.Play)
+        if (timeCountForAvtoDown > TimeLevelCount && CommonData.Play)
         {
             blockController.DownAuto();
             ResetPosition();
@@ -386,8 +400,35 @@ public class Main : MonoBehaviour
             Application.Quit();
         }
         Line.text = "Line " + CommonData.Line;
-
         Score.text = "Score " + CommonData.Score;
+        LevelTimeAvtoDownStep();
+
+    }
+    void LevelTimeAvtoDownStep()
+    {
+        switch (CommonData.Line / 20)
+        {
+            case 0:
+                TimeLevelCount = 1;
+                Level.text = "Level 1 ";
+                break;
+
+            case 1:
+                TimeLevelCount = 0.8f;
+                Level.text = "Level 2 ";
+                break;
+
+            case 2:
+                TimeLevelCount = 0.6f;
+                Level.text = "Level 3 ";
+                break;
+
+            default:
+                TimeLevelCount = 0.4f;
+                Level.text = "Level 4 ";
+                break;
+        }
+
     }
     void ResetPosition()
     {
@@ -441,6 +482,11 @@ public class Main : MonoBehaviour
             }
         }
     }
+    public void Next_Element(BlockController bc)
+    {
+        NextElement nextElement = new NextElement();
+        bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
+    }
     public void ResetGame(BlockController bc)
     {
         CommonData.Play = true;
@@ -458,8 +504,6 @@ public class Main : MonoBehaviour
         bc.Score = 0;
         CommonData.Line = 0;
         CommonData.Score = 0;
-
-
     }
 }
 

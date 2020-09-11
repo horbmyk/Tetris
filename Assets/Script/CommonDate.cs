@@ -13,7 +13,6 @@ public static class CommonData
     public static int Lenght_HintArr = 5;
     public static Hint hint;
     public static bool Play;
-    public static float timestep;
     public static void ResetCasper()
     {
 
@@ -31,4 +30,10 @@ public static class CommonData
     }
     public static int Line;
     public static int Score;
+    public static Main main;
+    public static GameObject Logo;
+    public static float timestep;
+    public static bool timestep_Go;
+
+
 }
