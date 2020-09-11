@@ -24,6 +24,8 @@ class Horizontal : StateBlockTetris
                 cells[i].Y -= 1;
             }
             Casper();
+            CommonData.timestep = 0;
+            CommonData.timestep_Go = false;
         }
     }
     public override void Right()
@@ -37,6 +39,8 @@ class Horizontal : StateBlockTetris
                 cells[i].Y += 1;
             }
             Casper();
+            CommonData.timestep = 0;
+            CommonData.timestep_Go = false;
         }
     }
     public override void DownAuto(BlockController bc)
@@ -51,14 +55,8 @@ class Horizontal : StateBlockTetris
             {
                 bc.GameOverPrint();
                 CommonData.Play = false;
-
-
             }
-            if (CommonData.Play)
-            {
-                NextElement nextElement = new NextElement();
-                bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
-            }
+            CommonData.timestep_Go = true;
         }
 
         if (cells[0].X < CommonData.Height - 1
@@ -84,9 +82,8 @@ class Horizontal : StateBlockTetris
                 || CommonData.CommonArr[cells[3].X + 1, cells[3].Y] > 0)
 
             {
-                bc.EnableLineAndCompress();
-                NextElement nextElement = new NextElement();
-                bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
+                CommonData.timestep = 0;
+                CommonData.timestep_Go = true;
             }
         }
     }
@@ -102,12 +99,6 @@ class Horizontal : StateBlockTetris
             {
                 bc.GameOverPrint();
                 CommonData.Play = false;
-
-            }
-            if (CommonData.Play)
-            {
-                NextElement nextElement = new NextElement();
-                bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
             }
         }
         {
@@ -397,9 +388,7 @@ class Vertical : StateBlockTetris
             bc.EnableLineAndCompress();
             NextElement nextElement = new NextElement();
             bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
-
         }
-
     }
     public override void Rotate(BlockController bc)
     {

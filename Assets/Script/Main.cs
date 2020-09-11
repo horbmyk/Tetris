@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-// секунду  кінці на пару рухів(Coroutine)(лишній блок нового елемета внизу down )
+//(лишній блок нового елемета one step )
 // при створенні елемента провірка ма місце бо нова деталь стае на місце
-
+//time step 0 в конструктор ротейт
+//time step в ван step
 
 public class NextElement
 {
@@ -331,7 +332,7 @@ public class Main : MonoBehaviour
     }
     void Update()
     {
-        
+        Debug.Log(CommonData.timestep+" "+CommonData.timestep_Go);
         if (Input.GetKeyDown(KeyCode.N))
         {
             CommonData.timestep = 0f;

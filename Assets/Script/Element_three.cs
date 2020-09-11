@@ -25,6 +25,8 @@ public class Element_three_State__1 : StateBlockTetris
                 cells[i].Y -= 1;
             }
             Casper();
+            CommonData.timestep = 0;
+            CommonData.timestep_Go = false;
         }
     }
     public override void Right()
@@ -40,6 +42,8 @@ public class Element_three_State__1 : StateBlockTetris
                 cells[i].Y += 1;
             }
             Casper();
+            CommonData.timestep = 0;
+            CommonData.timestep_Go = false;
         }
     }
     public override void DownAuto(BlockController bc)
@@ -55,11 +59,7 @@ public class Element_three_State__1 : StateBlockTetris
                 bc.GameOverPrint();
                 CommonData.Play = false;
             }
-            if (CommonData.Play)
-            {
-                NextElement nextElement = new NextElement();
-                bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
-            }
+            CommonData.timestep_Go = true;
         }
         if (cells[0].X < CommonData.Height - 1
             && CommonData.CommonArr[cells[0].X + 1, cells[0].Y] <= 0
@@ -81,9 +81,8 @@ public class Element_three_State__1 : StateBlockTetris
              || CommonData.CommonArr[cells[1].X + 1, cells[1].Y] > 0
              || CommonData.CommonArr[cells[2].X + 1, cells[2].Y] > 0)
             {
-                bc.EnableLineAndCompress();
-                NextElement nextElement = new NextElement();
-                bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
+                CommonData.timestep = 0;
+                CommonData.timestep_Go = true;
             }
         }
     }
@@ -238,6 +237,8 @@ public class Element_three_State__2 : StateBlockTetris
                 cells[i].Y -= 1;
             }
             Casper();
+            CommonData.timestep = 0;
+            CommonData.timestep_Go = false;
         }
     }
     public override void Right()
@@ -254,6 +255,8 @@ public class Element_three_State__2 : StateBlockTetris
                 cells[i].Y += 1;
             }
             Casper();
+            CommonData.timestep = 0;
+            CommonData.timestep_Go = false;
         }
     }
     public override void DownAuto(BlockController bc)
@@ -268,11 +271,7 @@ public class Element_three_State__2 : StateBlockTetris
                 bc.GameOverPrint();
                 CommonData.Play = false;
             }
-            if (CommonData.Play)
-            {
-                NextElement nextElement = new NextElement();
-                bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
-            }
+            CommonData.timestep_Go = true;
         }
         if (cells[2].X < CommonData.Height - 1
             && CommonData.CommonArr[cells[2].X + 1, cells[2].Y] <= 0
@@ -292,9 +291,8 @@ public class Element_three_State__2 : StateBlockTetris
                  || CommonData.CommonArr[cells[2].X + 1, cells[2].Y] > 0
                  || CommonData.CommonArr[cells[3].X + 1, cells[3].Y] > 0)
             {
-                bc.EnableLineAndCompress();
-                NextElement nextElement = new NextElement();
-                bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
+                CommonData.timestep = 0;
+                CommonData.timestep_Go = true;
             }
         }
     }
@@ -486,6 +484,8 @@ public class Element_three_State__3 : StateBlockTetris
                 cells[i].Y -= 1;
             }
             Casper();
+            CommonData.timestep = 0;
+            CommonData.timestep_Go = false;
         }
     }
     public override void Right()
@@ -501,6 +501,8 @@ public class Element_three_State__3 : StateBlockTetris
                 cells[i].Y += 1;
             }
             Casper();
+            CommonData.timestep = 0;
+            CommonData.timestep_Go = false;
         }
     }
     public override void DownAuto(BlockController bc)
@@ -516,11 +518,7 @@ public class Element_three_State__3 : StateBlockTetris
                 bc.GameOverPrint();
                 CommonData.Play = false;
             }
-            if (CommonData.Play)
-            {
-                NextElement nextElement = new NextElement();
-                bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
-            }
+            CommonData.timestep_Go = true;
         }
         if (cells[3].X < CommonData.Height - 1
             && CommonData.CommonArr[cells[0].X + 1, cells[0].Y] <= 0
@@ -542,9 +540,8 @@ public class Element_three_State__3 : StateBlockTetris
                  || CommonData.CommonArr[cells[2].X + 1, cells[2].Y] > 0
                  || CommonData.CommonArr[cells[3].X + 1, cells[3].Y] > 0)
             {
-                bc.EnableLineAndCompress();
-                NextElement nextElement = new NextElement();
-                bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
+                CommonData.timestep = 0;
+                CommonData.timestep_Go = true;
             }
         }
     }
@@ -735,6 +732,8 @@ public class Element_three_State__4 : StateBlockTetris
                 cells[i].Y -= 1;
             }
             Casper();
+            CommonData.timestep = 0;
+            CommonData.timestep_Go = false;
         }
     }
     public override void Right()
@@ -751,6 +750,8 @@ public class Element_three_State__4 : StateBlockTetris
                 cells[i].Y += 1;
             }
             Casper();
+            CommonData.timestep = 0;
+            CommonData.timestep_Go = false;
         }
     }
     public override void DownAuto(BlockController bc)
@@ -765,11 +766,7 @@ public class Element_three_State__4 : StateBlockTetris
                 bc.GameOverPrint();
                 CommonData.Play = false;
             }
-            if (CommonData.Play)
-            {
-                NextElement nextElement = new NextElement();
-                bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
-            }
+            CommonData.timestep_Go = true;
         }
         if (cells[0].X < CommonData.Height - 1
             && CommonData.CommonArr[cells[0].X + 1, cells[0].Y] <= 0
@@ -789,9 +786,8 @@ public class Element_three_State__4 : StateBlockTetris
                  || CommonData.CommonArr[cells[0].X + 1, cells[0].Y] > 0
                  || CommonData.CommonArr[cells[3].X + 1, cells[3].Y] > 0)
             {
-                bc.EnableLineAndCompress();
-                NextElement nextElement = new NextElement();
-                bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
+                CommonData.timestep = 0;
+                CommonData.timestep_Go = true;
             }
         }
     }
