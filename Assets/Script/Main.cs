@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 //(лишній блок нового елемета one step )
+//time step в ван step
 // при створенні елемента провірка ма місце бо нова деталь стае на місце
 //time step 0 в конструктор ротейт
-//time step в ван step
+
 
 public class NextElement
 {
@@ -332,21 +333,13 @@ public class Main : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(CommonData.timestep+" "+CommonData.timestep_Go);
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            CommonData.timestep = 0f;
-            CommonData.timestep_Go = true;
-        }
-        if (CommonData.timestep >= 1f && CommonData.timestep_Go)
+        if (CommonData.timestep >= 0.5f && CommonData.timestep_Go)
         {
             blockController.EnableLineAndCompress();
             Next_Element(blockController);
             ResetPosition();
             CommonData.timestep_Go = false;
         }
-
-
 
         CommonData.timestep += Time.deltaTime;
         timeCountForHighSpeed += Time.deltaTime;

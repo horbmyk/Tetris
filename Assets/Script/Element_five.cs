@@ -95,12 +95,10 @@ public class Element_five : StateBlockTetris
                 bc.GameOverPrint();
                 CommonData.Play = false;
             }
-            if (CommonData.Play)
-            {
-                NextElement nextElement = new NextElement();
-                bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
-            }
         }
+        if (cells[2].X != CommonData.Height - 1
+    && CommonData.CommonArr[cells[2].X + 1, cells[2].Y] <= 0
+    && CommonData.CommonArr[cells[3].X + 1, cells[3].Y] <= 0)
         {
             int Count = 0;
             for (int m = 1; m < CommonData.Height; m++)
@@ -120,11 +118,10 @@ public class Element_five : StateBlockTetris
             {
                 CommonData.CommonArr[cells[i].X + Count, cells[i].Y] = CommonData.CommonArr[cells[i].X, cells[i].Y];
                 CommonData.CommonArr[cells[i].X, cells[i].Y] = 0;
-                cells[i].X += 1;
+                cells[i].X += Count;
             }
-            bc.EnableLineAndCompress();
-            NextElement nextElement = new NextElement();
-            bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
+            CommonData.timestep = 0;
+            CommonData.timestep_Go = true;
         }
     }
     public override void Rotate(BlockController bc) { }

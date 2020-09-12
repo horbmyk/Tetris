@@ -102,12 +102,11 @@ class Element_seven_State_1 : StateBlockTetris
                 bc.GameOverPrint();
                 CommonData.Play = false;
             }
-            if (CommonData.Play)
-            {
-                NextElement nextElement = new NextElement();
-                bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
-            }
         }
+        if (cells[0].X != CommonData.Height - 1
+    && CommonData.CommonArr[cells[0].X + 1, cells[0].Y] <= 0
+    && CommonData.CommonArr[cells[3].X + 1, cells[3].Y] <= 0
+    && CommonData.CommonArr[cells[1].X + 1, cells[1].Y] <= 0)
         {
             int Count = 0;
             for (int m = 1; m < CommonData.Height; m++)
@@ -128,11 +127,10 @@ class Element_seven_State_1 : StateBlockTetris
             {
                 CommonData.CommonArr[cells[i].X + Count, cells[i].Y] = CommonData.CommonArr[cells[i].X, cells[i].Y];
                 CommonData.CommonArr[cells[i].X, cells[i].Y] = 0;
-                cells[i].X += 1;
+                cells[i].X += Count;
             }
-            bc.EnableLineAndCompress();
-            NextElement nextElement = new NextElement();
-            bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
+            CommonData.timestep = 0;
+            CommonData.timestep_Go = true;
         }
 
     }
@@ -313,12 +311,10 @@ class Element_seven_State_2 : StateBlockTetris
                 bc.GameOverPrint();
                 CommonData.Play = false;
             }
-            if (CommonData.Play)
-            {
-                NextElement nextElement = new NextElement();
-                bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
-            }
         }
+        if (cells[3].X != CommonData.Height - 1
+    && CommonData.CommonArr[cells[1].X + 1, cells[1].Y] <= 0
+    && CommonData.CommonArr[cells[3].X + 1, cells[3].Y] <= 0)
         {
             int Count = 0;
             for (int m = 1; m < CommonData.Height; m++)
@@ -338,11 +334,10 @@ class Element_seven_State_2 : StateBlockTetris
             {
                 CommonData.CommonArr[cells[i].X + Count, cells[i].Y] = CommonData.CommonArr[cells[i].X, cells[i].Y];
                 CommonData.CommonArr[cells[i].X, cells[i].Y] = 0;
-                cells[i].X += 1;
+                cells[i].X += Count;
             }
-            bc.EnableLineAndCompress();
-            NextElement nextElement = new NextElement();
-            bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
+            CommonData.timestep = 0;
+            CommonData.timestep_Go = true;
         }
     }
     public override void Rotate(BlockController bc)

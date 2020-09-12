@@ -98,6 +98,9 @@ public class Element_two_State__1 : StateBlockTetris
                 CommonData.Play = false;
             }
         }
+        if (cells[0].X != CommonData.Height - 1
+     && CommonData.CommonArr[cells[0].X + 1, cells[0].Y] <= 0
+     && CommonData.CommonArr[cells[3].X + 1, cells[3].Y] <= 0)
         {
             int Count = 0;
             for (int m = 1; m < CommonData.Height; m++)
@@ -117,11 +120,10 @@ public class Element_two_State__1 : StateBlockTetris
             {
                 CommonData.CommonArr[cells[i].X + Count, cells[i].Y] = CommonData.CommonArr[cells[i].X, cells[i].Y];
                 CommonData.CommonArr[cells[i].X, cells[i].Y] = 0;
-                cells[i].X += 1;
+                cells[i].X += Count;
             }
-            bc.EnableLineAndCompress();
-            NextElement nextElement = new NextElement();
-            bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
+            CommonData.timestep = 0;
+            CommonData.timestep_Go = true;
         }
     }
     public override void Rotate(BlockController bc)
@@ -340,14 +342,12 @@ public class Element_two_State__2 : StateBlockTetris
             {
                 bc.GameOverPrint();
                 CommonData.Play = false;
-
-            }
-            if (CommonData.Play)
-            {
-                NextElement nextElement = new NextElement();
-                bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
             }
         }
+        if (cells[3].X != CommonData.Height - 1
+   && CommonData.CommonArr[cells[0].X + 1, cells[0].Y] <= 0
+   && CommonData.CommonArr[cells[1].X + 1, cells[1].Y] <= 0
+   && CommonData.CommonArr[cells[3].X + 1, cells[3].Y] <= 0)
         {
             int Count = 0;
             for (int m = 1; m < CommonData.Height; m++)
@@ -368,23 +368,22 @@ public class Element_two_State__2 : StateBlockTetris
             {
                 CommonData.CommonArr[cells[i].X + Count, cells[i].Y] = CommonData.CommonArr[cells[i].X, cells[i].Y];
                 CommonData.CommonArr[cells[i].X, cells[i].Y] = 0;
-                cells[i].X += 1;
+                cells[i].X += Count;
             }
-            bc.EnableLineAndCompress();
-            NextElement nextElement = new NextElement();
-            bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
+            CommonData.timestep = 0;
+            CommonData.timestep_Go = true;
         }
     }
     public override void Rotate(BlockController bc)
     {
-        if (cells[1].X  == 0
+        if (cells[1].X == 0
     && CommonData.CommonArr[cells[0].X + 1, cells[0].Y] == 0
     && CommonData.CommonArr[cells[0].X + 2, cells[0].Y] == 0
     && CommonData.CommonArr[cells[1].X + 1, cells[1].Y] == 0
     && CommonData.CommonArr[cells[1].X + 1, cells[1].Y] == 0
-    && CommonData.CommonArr[cells[3].X + 1, cells[3].Y] == 0    )
+    && CommonData.CommonArr[cells[3].X + 1, cells[3].Y] == 0)
         {
-            CommonData.CommonArr[cells[3].X+1, cells[3].Y - 2] = CommonData.CommonArr[cells[3].X, cells[3].Y];
+            CommonData.CommonArr[cells[3].X + 1, cells[3].Y - 2] = CommonData.CommonArr[cells[3].X, cells[3].Y];
             CommonData.CommonArr[cells[3].X, cells[3].Y] = 0;
 
             CommonData.CommonArr[cells[2].X + 2, cells[2].Y - 1] = CommonData.CommonArr[cells[2].X, cells[2].Y];
@@ -592,12 +591,10 @@ public class Element_two_State__3 : StateBlockTetris
                 CommonData.Play = false;
 
             }
-            if (CommonData.Play)
-            {
-                NextElement nextElement = new NextElement();
-                bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
-            }
         }
+        if (cells[3].X != CommonData.Height - 1
+    && CommonData.CommonArr[cells[2].X + 1, cells[2].Y] <= 0
+    && CommonData.CommonArr[cells[3].X + 1, cells[3].Y] <= 0)
         {
             int Count = 0;
             for (int m = 1; m < CommonData.Height; m++)
@@ -617,11 +614,10 @@ public class Element_two_State__3 : StateBlockTetris
             {
                 CommonData.CommonArr[cells[i].X + Count, cells[i].Y] = CommonData.CommonArr[cells[i].X, cells[i].Y];
                 CommonData.CommonArr[cells[i].X, cells[i].Y] = 0;
-                cells[i].X += 1;
+                cells[i].X += Count;
             }
-            bc.EnableLineAndCompress();
-            NextElement nextElement = new NextElement();
-            bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
+            CommonData.timestep = 0;
+            CommonData.timestep_Go = true;
         }
     }
     public override void Rotate(BlockController bc)
@@ -633,16 +629,16 @@ public class Element_two_State__3 : StateBlockTetris
      && CommonData.CommonArr[cells[1].X, cells[1].Y - 2] == 0
      && CommonData.CommonArr[cells[3].X, cells[3].Y - 1] == 0)
         {
-            CommonData.CommonArr[cells[3].X - 2, cells[3].Y-1] = CommonData.CommonArr[cells[3].X, cells[3].Y];
+            CommonData.CommonArr[cells[3].X - 2, cells[3].Y - 1] = CommonData.CommonArr[cells[3].X, cells[3].Y];
             CommonData.CommonArr[cells[3].X, cells[3].Y] = 0;
 
             CommonData.CommonArr[cells[2].X - 1, cells[2].Y - 2] = CommonData.CommonArr[cells[2].X, cells[2].Y];
             CommonData.CommonArr[cells[2].X, cells[2].Y] = 0;
-            
+
             CommonData.CommonArr[cells[1].X, cells[1].Y - 1] = CommonData.CommonArr[cells[2].X, cells[2].Y];
             CommonData.CommonArr[cells[1].X, cells[1].Y] = 0;
 
-            CommonData.CommonArr[cells[0].X + 1, cells[0].Y ] = CommonData.CommonArr[cells[0].X, cells[0].Y];
+            CommonData.CommonArr[cells[0].X + 1, cells[0].Y] = CommonData.CommonArr[cells[0].X, cells[0].Y];
             CommonData.CommonArr[cells[0].X, cells[0].Y] = 0;
 
             cells[3].X -= 2;
@@ -652,7 +648,7 @@ public class Element_two_State__3 : StateBlockTetris
             cells[2].Y -= 2;
 
             cells[1].Y -= 1;
-            
+
             cells[0].X += 1;
             {
                 Cell c_0 = new Cell(cells[0].X, cells[0].Y, 2);
@@ -841,14 +837,12 @@ public class Element_two_State__4 : StateBlockTetris
             {
                 bc.GameOverPrint();
                 CommonData.Play = false;
-
-            }
-            if (CommonData.Play)
-            {
-                NextElement nextElement = new NextElement();
-                bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
             }
         }
+        if (cells[0].X != CommonData.Height - 1
+            && CommonData.CommonArr[cells[0].X + 1, cells[0].Y] <= 0
+            && CommonData.CommonArr[cells[1].X + 1, cells[1].Y] <= 0
+            && CommonData.CommonArr[cells[2].X + 1, cells[2].Y] <= 0)
         {
             int Count = 0;
             for (int m = 1; m < CommonData.Height; m++)
@@ -869,11 +863,10 @@ public class Element_two_State__4 : StateBlockTetris
             {
                 CommonData.CommonArr[cells[i].X + Count, cells[i].Y] = CommonData.CommonArr[cells[i].X, cells[i].Y];
                 CommonData.CommonArr[cells[i].X, cells[i].Y] = 0;
-                cells[i].X += 1;
+                cells[i].X += Count;
             }
-            bc.EnableLineAndCompress();
-            NextElement nextElement = new NextElement();
-            bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
+            CommonData.timestep = 0;
+            CommonData.timestep_Go = true;
         }
     }
     public override void Rotate(BlockController bc)
