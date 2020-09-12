@@ -104,7 +104,7 @@ public class Hint : MonoBehaviour
             }
         }
         number = Random.Range(1, 20);
-        //number = 16;
+       number = 17;
         switch (number)
         {
             case 1:
