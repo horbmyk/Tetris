@@ -12,6 +12,8 @@ class Horizontal : StateBlockTetris
         cells[2] = c_2;
         cells[3] = c_3;
         Casper();
+        CommonData.timestep = 0;
+        CommonData.timestep_Go = false;
     }
     public override void Left()
     {
@@ -123,7 +125,7 @@ class Horizontal : StateBlockTetris
                     break;
                 }
             }
-            for (int i = cells.Length - 1; i >= 0; i--)
+            for (int i = 0; i < cells.Length; i++)
             {
                 CommonData.CommonArr[cells[i].X + Count, cells[i].Y] = CommonData.CommonArr[cells[i].X, cells[i].Y];
                 CommonData.CommonArr[cells[i].X, cells[i].Y] = 0;
@@ -282,7 +284,8 @@ class Vertical : StateBlockTetris
         cells[2] = c_2;
         cells[3] = c_3;
         Casper();
-
+        CommonData.timestep = 0;
+        CommonData.timestep_Go = false;
     }
     public override void Left()
     {
@@ -369,8 +372,8 @@ class Vertical : StateBlockTetris
                 CommonData.Play = false;
             }
         }
-        if (cells[3].X != CommonData.Height - 1//!=
-   && CommonData.CommonArr[cells[3].X + 1, cells[3].Y] <= 0)//&&//<=
+        if (cells[3].X != CommonData.Height - 1
+   && CommonData.CommonArr[cells[3].X + 1, cells[3].Y] <= 0)
         {
             int Count = 0;
             for (int m = 1; m < CommonData.Height; m++)

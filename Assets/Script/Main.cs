@@ -331,7 +331,8 @@ public class Main : MonoBehaviour
     }
     void Update()
     {
-        if (CommonData.timestep >= 0.75f && CommonData.timestep_Go)
+        Debug.Log(CommonData.timestep+" "+CommonData.timestep_Go);
+        if (CommonData.timestep >= 0.4f && CommonData.timestep_Go)
         {
             blockController.EnableLineAndCompress();
             Next_Element(blockController);
@@ -342,9 +343,7 @@ public class Main : MonoBehaviour
         CommonData.timestep += Time.deltaTime;
         timeCountForHighSpeed += Time.deltaTime;
         timeCountForAvtoDown += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.S))
-
-        //if (timeCountForAvtoDown > TimeLevelCount && CommonData.Play)
+        if (timeCountForAvtoDown > TimeLevelCount && CommonData.Play)
         {
             blockController.DownAuto();
             ResetPosition();

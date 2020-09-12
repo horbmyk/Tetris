@@ -364,7 +364,7 @@ public class Element_two_State__2 : StateBlockTetris
                     break;
                 }
             }
-            for (int i = 0; i < cells.Length; i++)
+            for (int i = cells.Length - 1; i >= 0; i--)
             {
                 CommonData.CommonArr[cells[i].X + Count, cells[i].Y] = CommonData.CommonArr[cells[i].X, cells[i].Y];
                 CommonData.CommonArr[cells[i].X, cells[i].Y] = 0;
@@ -610,7 +610,7 @@ public class Element_two_State__3 : StateBlockTetris
                     break;
                 }
             }
-            for (int i = 0; i < cells.Length; i++)
+            for (int i = cells.Length - 1; i >= 0; i--)
             {
                 CommonData.CommonArr[cells[i].X + Count, cells[i].Y] = CommonData.CommonArr[cells[i].X, cells[i].Y];
                 CommonData.CommonArr[cells[i].X, cells[i].Y] = 0;

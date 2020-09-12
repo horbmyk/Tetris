@@ -328,7 +328,7 @@ class Element_six_State_2 : StateBlockTetris
                     break;
                 }
             }
-            for (int i = cells.Length - 1; i >= 0; i--)//
+            for (int i = cells.Length - 1; i >= 0; i--)
             {
                 CommonData.CommonArr[cells[i].X + Count, cells[i].Y] = CommonData.CommonArr[cells[i].X, cells[i].Y];
                 CommonData.CommonArr[cells[i].X, cells[i].Y] = 0;
@@ -336,7 +336,6 @@ class Element_six_State_2 : StateBlockTetris
             }
             CommonData.timestep = 0;
             CommonData.timestep_Go = true;
-            Debug.Log(Count);
         }
     }
     public override void Rotate(BlockController bc)
