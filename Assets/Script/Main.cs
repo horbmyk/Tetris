@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 // при створенні елемента провірка ма місце бо нова деталь стае на місце
-//time step 0 в конструктор ротейт
 
 
 public class NextElement
 {
     public StateBlockTetris GeneretedSBT(int RandNum)
     {
-
         StateBlockTetris stateBlockTetris = null;
         if (RandNum == 1)
         {
@@ -222,6 +220,7 @@ public class BlockController
     }
     public void EnableLineAndCompress()
     {
+        CommonData.Logo_Tetris.SetActive(false);
         Line = 0;
         Score = 0;
         for (int m = CommonData.Height - 1; m > 0; m--)//?While ??
@@ -278,6 +277,9 @@ public class BlockController
 
             case 4:
                 Score += 1500;
+                CommonData.timeforLogoTetris = 0;
+                CommonData.Tetris_Logo_bool=true;
+                CommonData.Logo_Tetris.SetActive(true);
                 break;
 
         }
@@ -286,7 +288,7 @@ public class BlockController
     }
     public void GameOverPrint()
     {
-        CommonData.Logo.SetActive(true);
+        CommonData.Logo_GameOver.SetActive(true);
     }
 }
 public class Main : MonoBehaviour
@@ -301,13 +303,17 @@ public class Main : MonoBehaviour
     public Text Line;
     public Text Score;
     public Text Level;
-    public GameObject Game_Over_Logo;
+    public GameObject Logo_Game_Over;
+    public GameObject Logo_Tetris;
     void Start()
     {
-        CommonData.Logo = Game_Over_Logo;
-        CommonData.Logo.SetActive(false);
+        CommonData.Logo_GameOver = Logo_Game_Over;
+        CommonData.Logo_GameOver.SetActive(false);
+        CommonData.Logo_Tetris = Logo_Tetris;
+        CommonData.Logo_Tetris.SetActive(false);
         CommonData.Play = true;
         CommonData.timestep_Go = false;
+        CommonData.Tetris_Logo_bool = false;
         CommonData.CommonArr = new int[CommonData.Height, CommonData.Lenght];
         for (int i = 0; i < CommonData.Height; i++)
         {
@@ -327,20 +333,18 @@ public class Main : MonoBehaviour
         blockController = new BlockController(nextElement.GeneretedSBT(CommonData.hint.NumberElement));
         ResetPosition();
         TimeLevelCount = 1;
-
     }
     void Update()
     {
-        Debug.Log(CommonData.timestep+" "+CommonData.timestep_Go);
-        if (CommonData.timestep >= 0.4f && CommonData.timestep_Go)
+        if (CommonData.timestep >= 0.35f && CommonData.timestep_Go)
         {
             blockController.EnableLineAndCompress();
             Next_Element(blockController);
             ResetPosition();
             CommonData.timestep_Go = false;
         }
-
         CommonData.timestep += Time.deltaTime;
+        CommonData.timeforLogoTetris += Time.deltaTime;
         timeCountForHighSpeed += Time.deltaTime;
         timeCountForAvtoDown += Time.deltaTime;
         if (timeCountForAvtoDown > TimeLevelCount && CommonData.Play)
@@ -391,8 +395,19 @@ public class Main : MonoBehaviour
         Line.text = "Line " + CommonData.Line;
         Score.text = "Score " + CommonData.Score;
         LevelTimeAvtoDownStep();
-
+        Set_Logo_Tetris();
     }
+    void Set_Logo_Tetris()
+    {
+        if (CommonData.Tetris_Logo_bool&&CommonData.timeforLogoTetris>=0.8f)
+        {
+
+            CommonData.Logo_Tetris.SetActive(false);
+            CommonData.Tetris_Logo_bool = false;
+        }
+        
+    }
+
     void LevelTimeAvtoDownStep()
     {
         switch (CommonData.Line / 20)

@@ -11,6 +11,8 @@ public class Element_five : StateBlockTetris
         cells[2] = c_2;
         cells[3] = c_3;
         Casper();
+        CommonData.timestep = 0;
+        CommonData.timestep_Go = false;
     }
     public override void Left()
     {
@@ -124,7 +126,7 @@ public class Element_five : StateBlockTetris
             CommonData.timestep_Go = true;
         }
     }
-    public override void Rotate(BlockController bc) { }
+    public override void Rotate(BlockController bc) { Casper();}
     void Casper()
     {
         CommonData.ResetCasper();

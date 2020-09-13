@@ -12,6 +12,8 @@ public class Element_four_State__1 : StateBlockTetris
         cells[2] = c_2;
         cells[3] = c_3;
         Casper();
+        CommonData.timestep = 0;
+        CommonData.timestep_Go = false;
     }
     public override void Left()
     {
@@ -255,6 +257,8 @@ public class Element_four_State__2 : StateBlockTetris
         cells[2] = c_2;
         cells[3] = c_3;
         Casper();
+        CommonData.timestep = 0;
+        CommonData.timestep_Go = false;
     }
     public override void Left()
     {
@@ -503,6 +507,8 @@ public class Element_four_State__3 : StateBlockTetris
         cells[2] = c_2;
         cells[3] = c_3;
         Casper();
+        CommonData.timestep = 0;
+        CommonData.timestep_Go = false;
     }
     public override void Left()
     {
@@ -745,6 +751,8 @@ public class Element_four_State__4 : StateBlockTetris
         cells[2] = c_2;
         cells[3] = c_3;
         Casper();
+        CommonData.timestep = 0;
+        CommonData.timestep_Go = false;
     }
     public override void Left()
     {

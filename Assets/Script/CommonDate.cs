@@ -31,9 +31,12 @@ public static class CommonData
     public static int Line;
     public static int Score;
     public static Main main;
-    public static GameObject Logo;
+    public static GameObject Logo_GameOver;
+    public static GameObject Logo_Tetris;
     public static float timestep;
     public static bool timestep_Go;
+    public static float timeforLogoTetris;
+    public static bool Tetris_Logo_bool;
 
 
 }
