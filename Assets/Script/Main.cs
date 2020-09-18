@@ -24,8 +24,7 @@ public class NextElement
                 CommonData.CommonArr[0, 2] > 0 &&
                 CommonData.CommonArr[1, 2] > 0 &&
                 CommonData.CommonArr[2, 2] > 0 &&
-                CommonData.CommonArr[3, 2] > 0
-                )
+                CommonData.CommonArr[3, 2] > 0)
             {
                 CommonData.Logo_GameOver.SetActive(true);
                 CommonData.Play = false;
@@ -39,6 +38,15 @@ public class NextElement
         }
         if (RandNum == 3)
         {
+            if (
+    CommonData.CommonArr[2, 2] > 0 &&
+    CommonData.CommonArr[1, 2] > 0 &&
+    CommonData.CommonArr[0, 2] > 0 &&
+    CommonData.CommonArr[0, 3] > 0)
+            {
+                CommonData.Logo_GameOver.SetActive(true);
+                CommonData.Play = false;
+            }
             Cell c_0_rand_3 = new Cell(2, 2, 2);
             Cell c_1_rand_3 = new Cell(1, 2, 2);
             Cell c_2_rand_3 = new Cell(0, 2, 2);
@@ -47,6 +55,15 @@ public class NextElement
         }
         if (RandNum == 4)
         {
+            if (
+    CommonData.CommonArr[0, 1] > 0 &&
+    CommonData.CommonArr[0, 2] > 0 &&
+    CommonData.CommonArr[0, 3] > 0 &&
+    CommonData.CommonArr[1, 3] > 0)
+            {
+                CommonData.Logo_GameOver.SetActive(true);
+                CommonData.Play = false;
+            }
             Cell c_0_rand_4 = new Cell(0, 1, 2);
             Cell c_1_rand_4 = new Cell(0, 2, 2);
             Cell c_2_rand_4 = new Cell(0, 3, 2);
@@ -55,6 +72,15 @@ public class NextElement
         }
         if (RandNum == 5)
         {
+            if (
+    CommonData.CommonArr[0, 3] > 0 &&
+    CommonData.CommonArr[1, 3] > 0 &&
+    CommonData.CommonArr[2, 3] > 0 &&
+    CommonData.CommonArr[2, 2] > 0)
+            {
+                CommonData.Logo_GameOver.SetActive(true);
+                CommonData.Play = false;
+            }
             Cell c_0_rand_5 = new Cell(0, 3, 2);
             Cell c_1_rand_5 = new Cell(1, 3, 2);
             Cell c_2_rand_5 = new Cell(2, 3, 2);
@@ -63,6 +89,15 @@ public class NextElement
         }
         if (RandNum == 6)
         {
+            if (
+    CommonData.CommonArr[1, 3] > 0 &&
+    CommonData.CommonArr[1, 2] > 0 &&
+    CommonData.CommonArr[1, 1] > 0 &&
+    CommonData.CommonArr[0, 1] > 0)
+            {
+                CommonData.Logo_GameOver.SetActive(true);
+                CommonData.Play = false;
+            }
             Cell c_0_rand_6 = new Cell(1, 3, 2);
             Cell c_1_rand_6 = new Cell(1, 2, 2);
             Cell c_2_rand_6 = new Cell(1, 1, 2);
@@ -71,6 +106,15 @@ public class NextElement
         }
         if (RandNum == 7)
         {
+            if (
+    CommonData.CommonArr[1, 1] > 0 &&
+    CommonData.CommonArr[1, 2] > 0 &&
+    CommonData.CommonArr[1, 3] > 0 &&
+    CommonData.CommonArr[0, 2] > 0)
+            {
+                CommonData.Logo_GameOver.SetActive(true);
+                CommonData.Play = false;
+            }
             Cell c_0_rand_7 = new Cell(1, 1, 3);
             Cell c_1_rand_7 = new Cell(1, 2, 3);
             Cell c_2_rand_7 = new Cell(1, 3, 3);
@@ -79,6 +123,15 @@ public class NextElement
         }
         if (RandNum == 8)
         {
+            if (
+    CommonData.CommonArr[0, 1] > 0 &&
+    CommonData.CommonArr[1, 1] > 0 &&
+    CommonData.CommonArr[2, 1] > 0 &&
+    CommonData.CommonArr[1, 2] > 0)
+            {
+                CommonData.Logo_GameOver.SetActive(true);
+                CommonData.Play = false;
+            }
             Cell c_0_rand_8 = new Cell(0, 1, 3);
             Cell c_1_rand_8 = new Cell(1, 1, 3);
             Cell c_2_rand_8 = new Cell(2, 1, 3);
@@ -87,6 +140,15 @@ public class NextElement
         }
         if (RandNum == 9)
         {
+            if (
+    CommonData.CommonArr[0, 3] > 0 &&
+    CommonData.CommonArr[0, 2] > 0 &&
+    CommonData.CommonArr[0, 1] > 0 &&
+    CommonData.CommonArr[1, 2] > 0)
+            {
+                CommonData.Logo_GameOver.SetActive(true);
+                CommonData.Play = false;
+            }
             Cell c_0_rand_9 = new Cell(0, 3, 3);
             Cell c_1_rand_9 = new Cell(0, 2, 3);
             Cell c_2_rand_9 = new Cell(0, 1, 3);
@@ -95,6 +157,15 @@ public class NextElement
         }
         if (RandNum == 10)
         {
+            if (
+    CommonData.CommonArr[2, 2] > 0 &&
+    CommonData.CommonArr[1, 2] > 0 &&
+    CommonData.CommonArr[0, 2] > 0 &&
+    CommonData.CommonArr[1, 1] > 0)
+            {
+                CommonData.Logo_GameOver.SetActive(true);
+                CommonData.Play = false;
+            }
             Cell c_0_rand_10 = new Cell(2, 2, 3);
             Cell c_1_rand_10 = new Cell(1, 2, 3);
             Cell c_2_rand_10 = new Cell(0, 2, 3);
@@ -103,6 +174,15 @@ public class NextElement
         }
         if (RandNum == 11)
         {
+            if (
+    CommonData.CommonArr[2, 2] > 0 &&
+    CommonData.CommonArr[1, 2] > 0 &&
+    CommonData.CommonArr[0, 2] > 0 &&
+    CommonData.CommonArr[0, 1] > 0)
+            {
+                CommonData.Logo_GameOver.SetActive(true);
+                CommonData.Play = false;
+            }
             Cell c_0_rand_11 = new Cell(2, 2, 4);
             Cell c_1_rand_11 = new Cell(1, 2, 4);
             Cell c_2_rand_11 = new Cell(0, 2, 4);
@@ -111,6 +191,15 @@ public class NextElement
         }
         if (RandNum == 12)
         {
+            if (
+    CommonData.CommonArr[0, 3] > 0 &&
+    CommonData.CommonArr[0, 2] > 0 &&
+    CommonData.CommonArr[0, 1] > 0 &&
+    CommonData.CommonArr[1, 1] > 0)
+            {
+                CommonData.Logo_GameOver.SetActive(true);
+                CommonData.Play = false;
+            }
             Cell c_0_rand_12 = new Cell(0, 3, 4);
             Cell c_1_rand_12 = new Cell(0, 2, 4);
             Cell c_2_rand_12 = new Cell(0, 1, 4);
@@ -119,6 +208,15 @@ public class NextElement
         }
         if (RandNum == 13)
         {
+            if (
+    CommonData.CommonArr[0, 2] > 0 &&
+    CommonData.CommonArr[1, 2] > 0 &&
+    CommonData.CommonArr[2, 2] > 0 &&
+    CommonData.CommonArr[2, 3] > 0)
+            {
+                CommonData.Logo_GameOver.SetActive(true);
+                CommonData.Play = false;
+            }
             Cell c_0_rand_13 = new Cell(0, 2, 4);
             Cell c_1_rand_13 = new Cell(1, 2, 4);
             Cell c_2_rand_13 = new Cell(2, 2, 4);
@@ -127,6 +225,15 @@ public class NextElement
         }
         if (RandNum == 14)
         {
+            if (
+    CommonData.CommonArr[1, 1] > 0 &&
+    CommonData.CommonArr[1, 2] > 0 &&
+    CommonData.CommonArr[1, 3] > 0 &&
+    CommonData.CommonArr[0, 3] > 0)
+            {
+                CommonData.Logo_GameOver.SetActive(true);
+                CommonData.Play = false;
+            }
             Cell c_0_rand_14 = new Cell(1, 1, 4);
             Cell c_1_rand_14 = new Cell(1, 2, 4);
             Cell c_2_rand_14 = new Cell(1, 3, 4);
@@ -135,6 +242,15 @@ public class NextElement
         }
         if (RandNum == 15)
         {
+            if (
+    CommonData.CommonArr[0, 1] > 0 &&
+    CommonData.CommonArr[0, 2] > 0 &&
+    CommonData.CommonArr[1, 1] > 0 &&
+    CommonData.CommonArr[1, 2] > 0)
+            {
+                CommonData.Logo_GameOver.SetActive(true);
+                CommonData.Play = false;
+            }
             Cell c_0_rand_15 = new Cell(0, 1, 1);
             Cell c_1_rand_15 = new Cell(0, 2, 1);
             Cell c_2_rand_15 = new Cell(1, 1, 1);
@@ -143,6 +259,15 @@ public class NextElement
         }
         if (RandNum == 16)
         {
+            if (
+    CommonData.CommonArr[1, 3] > 0 &&
+    CommonData.CommonArr[1, 2] > 0 &&
+    CommonData.CommonArr[0, 2] > 0 &&
+    CommonData.CommonArr[0, 1] > 0)
+            {
+                CommonData.Logo_GameOver.SetActive(true);
+                CommonData.Play = false;
+            }
             Cell c_0_rand_16 = new Cell(1, 3, 5);
             Cell c_1_rand_16 = new Cell(1, 2, 5);
             Cell c_2_rand_16 = new Cell(0, 2, 5);
@@ -151,6 +276,15 @@ public class NextElement
         }
         if (RandNum == 17)
         {
+            if (
+    CommonData.CommonArr[0, 2] > 0 &&
+    CommonData.CommonArr[1, 2] > 0 &&
+    CommonData.CommonArr[1, 1] > 0 &&
+    CommonData.CommonArr[2, 1] > 0)
+            {
+                CommonData.Logo_GameOver.SetActive(true);
+                CommonData.Play = false;
+            }
             Cell c_0_rand_17 = new Cell(0, 2, 5);
             Cell c_1_rand_17 = new Cell(1, 2, 5);
             Cell c_2_rand_17 = new Cell(1, 1, 5);
@@ -159,6 +293,15 @@ public class NextElement
         }
         if (RandNum == 18)
         {
+            if (
+    CommonData.CommonArr[1, 1] > 0 &&
+    CommonData.CommonArr[1, 2] > 0 &&
+    CommonData.CommonArr[0, 2] > 0 &&
+    CommonData.CommonArr[0, 3] > 0)
+            {
+                CommonData.Logo_GameOver.SetActive(true);
+                CommonData.Play = false;
+            }
             Cell c_0_rand_18 = new Cell(1, 1, 6);
             Cell c_1_rand_18 = new Cell(1, 2, 6);
             Cell c_2_rand_18 = new Cell(0, 2, 6);
@@ -167,6 +310,15 @@ public class NextElement
         }
         if (RandNum == 19)
         {
+            if (
+    CommonData.CommonArr[0, 2] > 0 &&
+    CommonData.CommonArr[1, 2] > 0 &&
+    CommonData.CommonArr[1, 3] > 0 &&
+    CommonData.CommonArr[2, 3] > 0)
+            {
+                CommonData.Logo_GameOver.SetActive(true);
+                CommonData.Play = false;
+            }
             Cell c_0_rand_19 = new Cell(0, 2, 6);
             Cell c_1_rand_19 = new Cell(1, 2, 6);
             Cell c_2_rand_19 = new Cell(1, 3, 6);
