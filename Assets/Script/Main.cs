@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 // при створенні елемента провірка ма місце бо нова деталь стае на місце
-
+//Cube prefab
 
 public class NextElement
 {
@@ -20,11 +20,22 @@ public class NextElement
         }
         if (RandNum == 2)
         {
+            if (
+                CommonData.CommonArr[0, 2] > 0 &&
+                CommonData.CommonArr[1, 2] > 0 &&
+                CommonData.CommonArr[2, 2] > 0 &&
+                CommonData.CommonArr[3, 2] > 0
+                )
+            {
+                CommonData.Logo_GameOver.SetActive(true);
+                CommonData.Play = false;
+            }
             Cell c_0_rand_2 = new Cell(0, 2, 1);
             Cell c_1_rand_2 = new Cell(1, 2, 1);
             Cell c_2_rand_2 = new Cell(2, 2, 1);
             Cell c_3_rand_2 = new Cell(3, 2, 1);
             stateBlockTetris = new Vertical(c_0_rand_2, c_1_rand_2, c_2_rand_2, c_3_rand_2);
+
         }
         if (RandNum == 3)
         {
@@ -164,7 +175,6 @@ public class NextElement
         }
         return stateBlockTetris;
     }
-
 }
 public class Cell
 {
@@ -278,7 +288,7 @@ public class BlockController
             case 4:
                 Score += 1500;
                 CommonData.timeforLogoTetris = 0;
-                CommonData.Tetris_Logo_bool=true;
+                CommonData.Tetris_Logo_bool = true;
                 CommonData.Logo_Tetris.SetActive(true);
                 break;
 
@@ -399,13 +409,13 @@ public class Main : MonoBehaviour
     }
     void Set_Logo_Tetris()
     {
-        if (CommonData.Tetris_Logo_bool&&CommonData.timeforLogoTetris>=0.8f)
+        if (CommonData.Tetris_Logo_bool && CommonData.timeforLogoTetris >= 0.8f)
         {
 
             CommonData.Logo_Tetris.SetActive(false);
             CommonData.Tetris_Logo_bool = false;
         }
-        
+
     }
 
     void LevelTimeAvtoDownStep()
@@ -488,7 +498,6 @@ public class Main : MonoBehaviour
     }
     public void Next_Element(BlockController bc)
     {
-        NextElement nextElement = new NextElement();
         bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
     }
     public void ResetGame(BlockController bc)
