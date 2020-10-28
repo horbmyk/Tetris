@@ -3,7 +3,218 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 //Cube prefab
+public class Main : MonoBehaviour
+{
+    public GameObject CubePrefab;
+    BlockController blockController;
+    NextElement nextElement;
+    float timeCountForAvtoDown;
+    float timeCountForHighSpeed;
+    float TimeLevelCount;
+    public Text Line;
+    public Text Score;
+    public Text Level;
+    public GameObject Logo_Game_Over;
+    public GameObject Logo_Tetris;
+    void Start()
+    {
+        CommonData.Logo_GameOver = Logo_Game_Over;
+        CommonData.Logo_GameOver.SetActive(false);
+        CommonData.Logo_Tetris = Logo_Tetris;
+        CommonData.Logo_Tetris.SetActive(false);
+        CommonData.Play = true;
+        CommonData.timestep_Go = false;
+        CommonData.Tetris_Logo_bool = false;
+        CommonData.CommonArr = new int[CommonData.Height, CommonData.Lenght];
+        CommonData.PoolCubes = new GameObject[CommonData.Height, CommonData.Lenght];
 
+        for (int i = 0; i < CommonData.Height; i++)
+        {
+            for (int k = 0; k < CommonData.Lenght; k++)
+            {
+                CommonData.CommonArr[i, k] = 0;
+                CommonData.PoolCubes[i, k] = Instantiate(CubePrefab);
+            }
+        }
+        nextElement = new NextElement();
+        blockController = new BlockController(nextElement.GeneretedSBT(CommonData.hint.NumberElement));
+        ResetPosition();
+        TimeLevelCount = 1;
+    }
+    void Update()
+    {
+        if (CommonData.timestep >= 0.35f && CommonData.timestep_Go)
+        {
+            blockController.EnableLineAndCompress();
+            Next_Element(blockController);
+            ResetPosition();
+            CommonData.timestep_Go = false;
+        }
+        CommonData.timestep += Time.deltaTime;
+        CommonData.timeforLogoTetris += Time.deltaTime;
+        timeCountForHighSpeed += Time.deltaTime;
+        timeCountForAvtoDown += Time.deltaTime;
+        if (timeCountForAvtoDown > TimeLevelCount && CommonData.Play)
+        {
+            blockController.DownAuto();
+            ResetPosition();
+            timeCountForAvtoDown = 0;
+        }
+        if (Input.GetKey(KeyCode.RightArrow) && CommonData.Play)
+        {
+            if (timeCountForHighSpeed > 0.1)
+            {
+                blockController.Right();
+                timeCountForHighSpeed = 0;
+                ResetPosition();
+            }
+        }
+        if (Input.GetKey(KeyCode.LeftArrow) && CommonData.Play)
+        {
+            if (timeCountForHighSpeed > 0.1)
+            {
+                blockController.Left();
+                timeCountForHighSpeed = 0;
+                ResetPosition();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow) && CommonData.Play)
+        {
+            blockController.DownOneStep();
+            ResetPosition();
+        }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow) && CommonData.Play)
+        {
+            CommonData.ResetCasper();
+            blockController.Rotate();
+            ResetPosition();
+        }
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            ResetGame(blockController);
+            ResetPosition();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))//?
+        {
+            Application.Quit();
+        }
+        Line.text = "Line " + CommonData.Line;
+        Score.text = "Score " + CommonData.Score;
+        LevelTimeAvtoDownStep();
+        Set_Logo_Tetris();
+    }
+    void Set_Logo_Tetris()
+    {
+        if (CommonData.Tetris_Logo_bool && CommonData.timeforLogoTetris >= 0.8f)
+        {
+
+            CommonData.Logo_Tetris.SetActive(false);
+            CommonData.Tetris_Logo_bool = false;
+        }
+
+    }
+
+    void LevelTimeAvtoDownStep()
+    {
+        switch (CommonData.Line / 20)
+        {
+            case 0:
+                TimeLevelCount = 1;
+                Level.text = "Level 1 ";
+                break;
+
+            case 1:
+                TimeLevelCount = 0.8f;
+                Level.text = "Level 2 ";
+                break;
+
+            case 2:
+                TimeLevelCount = 0.6f;
+                Level.text = "Level 3 ";
+                break;
+
+            default:
+                TimeLevelCount = 0.4f;
+                Level.text = "Level 4 ";
+                break;
+        }
+
+    }
+    void ResetPosition()
+    {
+        for (int i = 0; i < CommonData.Height; i++)
+        {
+            for (int k = 0; k < CommonData.Lenght; k++)
+            {
+                CommonData.PoolCubes[i,k].transform.position = new Vector3(i, 0, k);
+
+                if (CommonData.CommonArr[i, k] == 0)
+                {
+                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.white;
+                    CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.gray;
+                }
+                if (CommonData.CommonArr[i, k] == 1)
+                {
+                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.green;
+                    CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.green;
+                }
+                if (CommonData.CommonArr[i, k] == 2)
+                {
+                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.blue;
+                    CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.blue;
+                }
+                if (CommonData.CommonArr[i, k] == 3)
+                {
+                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
+                    CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.red;
+                }
+                if (CommonData.CommonArr[i, k] == 4)
+                {
+                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
+                    CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.yellow;
+                }
+                if (CommonData.CommonArr[i, k] == 5)
+                {
+                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
+                    CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.cyan;
+                }
+                if (CommonData.CommonArr[i, k] == 6)
+                {
+                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
+                    CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.red;
+                }
+                if (CommonData.CommonArr[i, k] == -1)
+                {
+                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
+                    CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.white;
+                }
+            }
+        }
+    }
+    public void Next_Element(BlockController bc)
+    {
+        bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
+    }
+    public void ResetGame(BlockController bc)
+    {
+        CommonData.Play = true;
+        CommonData.CommonArr = new int[CommonData.Height, CommonData.Lenght];
+        for (int i = 0; i < CommonData.Height; i++)
+        {
+            for (int k = 0; k < CommonData.Lenght; k++)
+            {
+                CommonData.CommonArr[i, k] = 0;
+            }
+        }
+        NextElement nextElement = new NextElement();
+        bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
+        bc.Line = 0;
+        bc.Score = 0;
+        CommonData.Line = 0;
+        CommonData.Score = 0;
+    }
+}
 public class NextElement
 {
     public StateBlockTetris GeneretedSBT(int RandNum)
@@ -405,7 +616,7 @@ public class BlockController
                 {
                     for (int k = 0; k < CommonData.Lenght; k++)
                     {
-                        CommonData.PoolCubes[k].transform.localScale = new Vector3(10,10,10);
+                      //  CommonData.PoolCubes[k].transform.localScale = new Vector3(10,10,10);
                         CommonData.CommonArr[i, k] = 0;
                         int IndexUpCompress = i;
                         for (int p = IndexUpCompress; p > 0; p--)
@@ -452,223 +663,6 @@ public class BlockController
     public void GameOverPrint()
     {
         CommonData.Logo_GameOver.SetActive(true);
-    }
-}
-public class Main : MonoBehaviour
-{
-    public GameObject CubePrefab;
-    BlockController blockController;
-    NextElement nextElement;
-    float timeCountForAvtoDown;
-    float timeCountForHighSpeed;
-    float TimeLevelCount;
-    public Text Line;
-    public Text Score;
-    public Text Level;
-    public GameObject Logo_Game_Over;
-    public GameObject Logo_Tetris;
-    void Start()
-    {
-        CommonData.Logo_GameOver = Logo_Game_Over;
-        CommonData.Logo_GameOver.SetActive(false);
-        CommonData.Logo_Tetris = Logo_Tetris;
-        CommonData.Logo_Tetris.SetActive(false);
-        CommonData.Play = true;
-        CommonData.timestep_Go = false;
-        CommonData.Tetris_Logo_bool = false;
-        CommonData.CommonArr = new int[CommonData.Height, CommonData.Lenght];
-        for (int i = 0; i < CommonData.Height; i++)
-        {
-            for (int k = 0; k < CommonData.Lenght; k++)
-            {
-                CommonData.CommonArr[i, k] = 0;
-            }
-        }
-
-        CommonData.PoolCubes = new List<GameObject>();
-        for (int i = 0; i < CommonData.Height * CommonData.Lenght; i++)
-        {
-            CommonData.PoolCubes.Add(Instantiate(CubePrefab));
-        }
-
-        nextElement = new NextElement();
-        blockController = new BlockController(nextElement.GeneretedSBT(CommonData.hint.NumberElement));
-        ResetPosition();
-        TimeLevelCount = 1;
-    }
-    void Update()
-    {
-        if (CommonData.timestep >= 0.35f && CommonData.timestep_Go)
-        {
-            blockController.EnableLineAndCompress();
-            Next_Element(blockController);
-            ResetPosition();
-            CommonData.timestep_Go = false;
-        }
-        CommonData.timestep += Time.deltaTime;
-        CommonData.timeforLogoTetris += Time.deltaTime;
-        timeCountForHighSpeed += Time.deltaTime;
-        timeCountForAvtoDown += Time.deltaTime;
-        if (timeCountForAvtoDown > TimeLevelCount && CommonData.Play)
-        {
-            blockController.DownAuto();
-            ResetPosition();
-            timeCountForAvtoDown = 0;
-        }
-        if (Input.GetKey(KeyCode.RightArrow) && CommonData.Play)
-        {
-            if (timeCountForHighSpeed > 0.1)
-            {
-                blockController.Right();
-                timeCountForHighSpeed = 0;
-                ResetPosition();
-            }
-        }
-        if (Input.GetKey(KeyCode.LeftArrow) && CommonData.Play)
-        {
-            if (timeCountForHighSpeed > 0.1)
-            {
-                blockController.Left();
-                timeCountForHighSpeed = 0;
-                ResetPosition();
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow) && CommonData.Play)
-        {
-            blockController.DownOneStep();
-            ResetPosition();
-        }
-
-        if (Input.GetKeyDown(KeyCode.UpArrow) && CommonData.Play)
-        {
-            CommonData.ResetCasper();
-            blockController.Rotate();
-            ResetPosition();
-        }
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            ResetGame(blockController);
-            ResetPosition();
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))//?
-        {
-            Application.Quit();
-        }
-        Line.text = "Line " + CommonData.Line;
-        Score.text = "Score " + CommonData.Score;
-        LevelTimeAvtoDownStep();
-        Set_Logo_Tetris();
-    }
-    void Set_Logo_Tetris()
-    {
-        if (CommonData.Tetris_Logo_bool && CommonData.timeforLogoTetris >= 0.8f)
-        {
-
-            CommonData.Logo_Tetris.SetActive(false);
-            CommonData.Tetris_Logo_bool = false;
-        }
-
-    }
-
-    void LevelTimeAvtoDownStep()
-    {
-        switch (CommonData.Line / 20)
-        {
-            case 0:
-                TimeLevelCount = 1;
-                Level.text = "Level 1 ";
-                break;
-
-            case 1:
-                TimeLevelCount = 0.8f;
-                Level.text = "Level 2 ";
-                break;
-
-            case 2:
-                TimeLevelCount = 0.6f;
-                Level.text = "Level 3 ";
-                break;
-
-            default:
-                TimeLevelCount = 0.4f;
-                Level.text = "Level 4 ";
-                break;
-        }
-
-    }
-    void ResetPosition()
-    {
-        int p = 0;
-        for (int i = 0; i < CommonData.Height; i++)
-        {
-            for (int k = 0; k < CommonData.Lenght; k++)
-            {
-                CommonData.PoolCubes[p].transform.position = new Vector3(i, 0, k);
-                if (CommonData.CommonArr[i, k] == 0)
-                {
-                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.white;
-                    CommonData.PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.gray;
-                }
-                if (CommonData.CommonArr[i, k] == 1)
-                {
-                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.green;
-                    CommonData.PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.green;
-                }
-                if (CommonData.CommonArr[i, k] == 2)
-                {
-                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.blue;
-                    CommonData.PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.blue;
-                }
-                if (CommonData.CommonArr[i, k] == 3)
-                {
-                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
-                    CommonData.PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.red;
-                }
-                if (CommonData.CommonArr[i, k] == 4)
-                {
-                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
-                    CommonData.PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.yellow;
-                }
-                if (CommonData.CommonArr[i, k] == 5)
-                {
-                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
-                    CommonData.PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.cyan;
-                }
-                if (CommonData.CommonArr[i, k] == 6)
-                {
-                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
-                    CommonData.PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.red;
-                }
-                if (CommonData.CommonArr[i, k] == -1)
-                {
-                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
-                    CommonData.PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.white;
-                }
-                p++;
-            }
-        }
-    }
-    public void Next_Element(BlockController bc)
-    {
-        bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
-    }
-    public void ResetGame(BlockController bc)
-    {
-        CommonData.Play = true;
-        CommonData.CommonArr = new int[CommonData.Height, CommonData.Lenght];
-        for (int i = 0; i < CommonData.Height; i++)
-        {
-            for (int k = 0; k < CommonData.Lenght; k++)
-            {
-                CommonData.CommonArr[i, k] = 0;
-            }
-        }
-        NextElement nextElement = new NextElement();
-        bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
-        bc.Line = 0;
-        bc.Score = 0;
-        CommonData.Line = 0;
-        CommonData.Score = 0;
     }
 }
 

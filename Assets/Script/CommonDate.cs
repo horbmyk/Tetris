@@ -16,9 +16,9 @@ public static class CommonData
     public static void ResetCasper()
     {
 
-        for (int i = 0; i <Height; i++)
+        for (int i = 0; i < Height; i++)
         {
-            for (int k = 0; k <Lenght; k++)
+            for (int k = 0; k < Lenght; k++)
             {
                 if (CommonArr[i, k] == -1)
                 {
@@ -37,7 +37,7 @@ public static class CommonData
     public static bool timestep_Go;
     public static float timeforLogoTetris;
     public static bool Tetris_Logo_bool;
-    public static List<GameObject> PoolCubes;
+    public static GameObject[,]PoolCubes;
 
 
 }
