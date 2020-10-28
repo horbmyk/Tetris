@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-// при створенні елемента провірка ма місце бо нова деталь стае на місце
 //Cube prefab
 
 public class NextElement
@@ -406,6 +405,7 @@ public class BlockController
                 {
                     for (int k = 0; k < CommonData.Lenght; k++)
                     {
+                        CommonData.PoolCubes[k].transform.localScale = new Vector3(10,10,10);
                         CommonData.CommonArr[i, k] = 0;
                         int IndexUpCompress = i;
                         for (int p = IndexUpCompress; p > 0; p--)
@@ -414,6 +414,7 @@ public class BlockController
                         }
                     }
                 }
+
                 if (IsOk)
                 {
                     Line += 1;
@@ -456,7 +457,6 @@ public class BlockController
 public class Main : MonoBehaviour
 {
     public GameObject CubePrefab;
-    List<GameObject> PoolCubes;
     BlockController blockController;
     NextElement nextElement;
     float timeCountForAvtoDown;
@@ -485,10 +485,10 @@ public class Main : MonoBehaviour
             }
         }
 
-        PoolCubes = new List<GameObject>();
+        CommonData.PoolCubes = new List<GameObject>();
         for (int i = 0; i < CommonData.Height * CommonData.Lenght; i++)
         {
-            PoolCubes.Add(Instantiate(CubePrefab));
+            CommonData.PoolCubes.Add(Instantiate(CubePrefab));
         }
 
         nextElement = new NextElement();
@@ -603,46 +603,46 @@ public class Main : MonoBehaviour
         {
             for (int k = 0; k < CommonData.Lenght; k++)
             {
-                PoolCubes[p].transform.position = new Vector3(i, 0, k);
+                CommonData.PoolCubes[p].transform.position = new Vector3(i, 0, k);
                 if (CommonData.CommonArr[i, k] == 0)
                 {
-                    //PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.white;
-                    PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.gray;
+                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.white;
+                    CommonData.PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.gray;
                 }
                 if (CommonData.CommonArr[i, k] == 1)
                 {
-                    //PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.green;
-                    PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.green;
+                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.green;
+                    CommonData.PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.green;
                 }
                 if (CommonData.CommonArr[i, k] == 2)
                 {
-                    //PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.blue;
-                    PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.blue;
+                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.blue;
+                    CommonData.PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.blue;
                 }
                 if (CommonData.CommonArr[i, k] == 3)
                 {
-                    //PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
-                    PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.red;
+                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
+                    CommonData.PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.red;
                 }
                 if (CommonData.CommonArr[i, k] == 4)
                 {
-                    //PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
-                    PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.yellow;
+                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
+                    CommonData.PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.yellow;
                 }
                 if (CommonData.CommonArr[i, k] == 5)
                 {
-                    //PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
-                    PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.cyan;
+                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
+                    CommonData.PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.cyan;
                 }
                 if (CommonData.CommonArr[i, k] == 6)
                 {
-                    //PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
-                    PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.red;
+                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
+                    CommonData.PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.red;
                 }
                 if (CommonData.CommonArr[i, k] == -1)
                 {
-                    //PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
-                    PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.white;
+                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
+                    CommonData.PoolCubes[p].GetComponent<SpriteRenderer>().color = Color.white;
                 }
                 p++;
             }

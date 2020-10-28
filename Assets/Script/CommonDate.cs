@@ -37,6 +37,7 @@ public static class CommonData
     public static bool timestep_Go;
     public static float timeforLogoTetris;
     public static bool Tetris_Logo_bool;
+    public static List<GameObject> PoolCubes;
 
 
 }
