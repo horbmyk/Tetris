@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 //Cube prefab
+//bluelementrotate
 public class Main : MonoBehaviour
 {
     public GameObject CubePrefab;
@@ -47,7 +48,6 @@ public class Main : MonoBehaviour
     {
         if (CommonData.timestep >= 0.35 && CommonData.timestep_Go)
         {
-            Debug.Log("in");
             Next_Element(blockController);
             ResetPosition();
             CommonData.timestep_Go = false;
