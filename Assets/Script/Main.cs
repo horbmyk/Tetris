@@ -25,6 +25,7 @@ public class Main : MonoBehaviour
         CommonData.Play = true;
         CommonData.timestep_Go = false;
         CommonData.Tetris_Logo_bool = false;
+        CommonData.pulseactive = false;
         CommonData.CommonArr = new int[CommonData.Height, CommonData.Lenght];
         CommonData.PoolCubes = new GameObject[CommonData.Height, CommonData.Lenght];
 
@@ -43,17 +44,38 @@ public class Main : MonoBehaviour
     }
     void Update()
     {
-        if (CommonData.timestep >= 0.35f && CommonData.timestep_Go)
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            blockController.EnableLineAndCompress();
+            CommonData.countforpulse = 0;
+            CommonData.pulseactive = false;
+        }
+        if (!CommonData.pulseactive)
+        {
+            Selectlines();
+            if (CommonData.countforpulse >= 2)
+            {
+                CommonData.pulseactive = true;
+                default_position();
+            }
+        }
+        if (CommonData.timestep >= 0.35 && CommonData.timestep_Go && CommonData.pulseactive)
+        {
+            blockController.CompressLine();
             Next_Element(blockController);
+
+
+
             ResetPosition();
+
             CommonData.timestep_Go = false;
         }
         CommonData.timestep += Time.deltaTime;
         CommonData.timeforLogoTetris += Time.deltaTime;
+        CommonData.countforpulse += Time.deltaTime;
+        Debug.Log(CommonData.countforpulse + " " + CommonData.pulseactive);
         timeCountForHighSpeed += Time.deltaTime;
         timeCountForAvtoDown += Time.deltaTime;
+
         if (timeCountForAvtoDown > TimeLevelCount && CommonData.Play)
         {
             blockController.DownAuto();
@@ -103,7 +125,6 @@ public class Main : MonoBehaviour
         Score.text = "Score " + CommonData.Score;
         LevelTimeAvtoDownStep();
         Set_Logo_Tetris();
-        PulseCube();
     }
     void Set_Logo_Tetris()
     {
@@ -214,29 +235,61 @@ public class Main : MonoBehaviour
         CommonData.Line = 0;
         CommonData.Score = 0;
     }
-    void PulseCube()
+    void Selectlines()
     {
-        if (CommonData.skalecoef < 0.75f && !CommonData.reversforpulse)
+        if (CommonData.skalecoef < 0.5f && !CommonData.reversforpulse)
         {
-            CommonData.skalecoef += 0.05f;
-            if (CommonData.skalecoef >= 0.75)
+            CommonData.skalecoef += 0.005f;
+            if (CommonData.skalecoef >= 0.5)
             {
                 CommonData.reversforpulse = true;
             }
         }
         if (CommonData.reversforpulse)
         {
-            CommonData.skalecoef -= 0.05f;
+            CommonData.skalecoef -= 0.005f;
             if (CommonData.skalecoef <= 0.25f)
             {
                 CommonData.reversforpulse = false;
             }
         }
-
-        CommonData.countforpulse += Time.deltaTime;
-        // Debug.Log(CommonData.countforpulse);
+        bool IsOk = false;
+        for (int i = CommonData.Height - 1; i >= 0; i--)
+        {
+            for (int k = 0; k < CommonData.Lenght; k++)
+            {
+                if (CommonData.CommonArr[i, k] > 0)
+                {
+                    IsOk = true;
+                }
+                else
+                {
+                    IsOk = false;
+                    break;
+                }
+            }
+            if (IsOk)
+            {
+                for (int k = 0; k < CommonData.Lenght; k++)
+                {
+                    CommonData.PoolCubes[i, k].transform.localScale = new Vector3(+CommonData.skalecoef, +CommonData.skalecoef, +CommonData.skalecoef);
+                }
+            }
+        }
+    }
+    void default_position()
+    {
+        for (int i = CommonData.Height - 1; i >= 0; i--)
+        {
+            for (int k = 0; k < CommonData.Lenght; k++)
+            {
+                CommonData.PoolCubes[i, k].transform.localScale = new Vector3(0.3353f, 0.3353f, 0.3353f);
+            }
+        }
 
     }
+
+
 }
 public class Cell
 {
@@ -290,7 +343,7 @@ public class BlockController
     {
         stateBlockTetris.Rotate(this);
     }
-    public void EnableLineAndCompress()
+    public void CompressLine()
     {
         CommonData.Logo_Tetris.SetActive(false);
         Line = 0;
@@ -316,7 +369,6 @@ public class BlockController
                 {
                     for (int k = 0; k < CommonData.Lenght; k++)
                     {
-                        // CommonData.PoolCubes[i, k].transform.localScale = new Vector3(+CommonData.skalecoef, +CommonData.skalecoef, +CommonData.skalecoef);
                         // CommonData.CommonArr[i, k] = 0;
                         int IndexUpCompress = i;
                         for (int p = IndexUpCompress; p > 0; p--)
@@ -324,8 +376,6 @@ public class BlockController
                             CommonData.CommonArr[p, k] = CommonData.CommonArr[p - 1, k];
                         }
                     }
-
-
                 }
                 if (IsOk)
                 {
