@@ -42,6 +42,7 @@ public static class CommonData
     public static bool reversforpulse;
     public static float countforpulse;
     public static bool pulseactive;
+    public static bool compressactive;
 
 
 }

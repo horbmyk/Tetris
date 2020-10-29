@@ -26,6 +26,7 @@ public class Main : MonoBehaviour
         CommonData.timestep_Go = false;
         CommonData.Tetris_Logo_bool = false;
         CommonData.pulseactive = false;
+        CommonData.compressactive = false;
         CommonData.CommonArr = new int[CommonData.Height, CommonData.Lenght];
         CommonData.PoolCubes = new GameObject[CommonData.Height, CommonData.Lenght];
 
@@ -44,35 +45,36 @@ public class Main : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (CommonData.timestep >= 0.35 && CommonData.timestep_Go)
         {
+            Debug.Log("in");
+            Next_Element(blockController);
+            ResetPosition();
+            CommonData.timestep_Go = false;
+            CommonData.pulseactive = true;
             CommonData.countforpulse = 0;
-            CommonData.pulseactive = false;
         }
-        if (!CommonData.pulseactive)
+        if (CommonData.pulseactive)
         {
             Selectlines();
             if (CommonData.countforpulse >= 2)
             {
-                CommonData.pulseactive = true;
+                CommonData.pulseactive = false;
+                CommonData.compressactive = true;
                 default_position();
             }
+
         }
-        if (CommonData.timestep >= 0.35 && CommonData.timestep_Go && CommonData.pulseactive)
+        if (CommonData.compressactive)
         {
-            blockController.CompressLine();
-            Next_Element(blockController);
-
-
-
-            ResetPosition();
-
-            CommonData.timestep_Go = false;
+            //blockController.CompressLine();
+            //CommonData.compressactive = false;
         }
+
+
         CommonData.timestep += Time.deltaTime;
         CommonData.timeforLogoTetris += Time.deltaTime;
         CommonData.countforpulse += Time.deltaTime;
-        Debug.Log(CommonData.countforpulse + " " + CommonData.pulseactive);
         timeCountForHighSpeed += Time.deltaTime;
         timeCountForAvtoDown += Time.deltaTime;
 

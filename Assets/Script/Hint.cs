@@ -103,7 +103,7 @@ public class Hint : MonoBehaviour
                 CommonData.HintArr[i, k] = 0;
             }
         }
-        number = Random.Range(1, 20); 
+        number = Random.Range(1, 20);
         switch (number)
         {
             case 1:
