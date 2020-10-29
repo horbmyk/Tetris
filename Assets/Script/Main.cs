@@ -103,6 +103,7 @@ public class Main : MonoBehaviour
         Score.text = "Score " + CommonData.Score;
         LevelTimeAvtoDownStep();
         Set_Logo_Tetris();
+        PulseCube();
     }
     void Set_Logo_Tetris()
     {
@@ -146,7 +147,7 @@ public class Main : MonoBehaviour
         {
             for (int k = 0; k < CommonData.Lenght; k++)
             {
-                CommonData.PoolCubes[i,k].transform.position = new Vector3(i, 0, k);
+                CommonData.PoolCubes[i, k].transform.position = new Vector3(i, 0, k);
 
                 if (CommonData.CommonArr[i, k] == 0)
                 {
@@ -212,6 +213,29 @@ public class Main : MonoBehaviour
         bc.Score = 0;
         CommonData.Line = 0;
         CommonData.Score = 0;
+    }
+    void PulseCube()
+    {
+        if (CommonData.skalecoef < 0.75f && !CommonData.reversforpulse)
+        {
+            CommonData.skalecoef += 0.05f;
+            if (CommonData.skalecoef >= 0.75)
+            {
+                CommonData.reversforpulse = true;
+            }
+        }
+        if (CommonData.reversforpulse)
+        {
+            CommonData.skalecoef -= 0.05f;
+            if (CommonData.skalecoef <= 0.25f)
+            {
+                CommonData.reversforpulse = false;
+            }
+        }
+
+        CommonData.countforpulse += Time.deltaTime;
+        // Debug.Log(CommonData.countforpulse);
+
     }
 }
 public class Cell
@@ -292,17 +316,17 @@ public class BlockController
                 {
                     for (int k = 0; k < CommonData.Lenght; k++)
                     {
-                        CommonData.PoolCubes[i,k].transform.localScale = new Vector3(2,2,2);
-
-                        //CommonData.CommonArr[i, k] = 0;
-                        //int IndexUpCompress = i;
-                        //for (int p = IndexUpCompress; p > 0; p--)
-                        //{
-                        //    CommonData.CommonArr[p, k] = CommonData.CommonArr[p - 1, k];
-                        //}
+                        // CommonData.PoolCubes[i, k].transform.localScale = new Vector3(+CommonData.skalecoef, +CommonData.skalecoef, +CommonData.skalecoef);
+                        // CommonData.CommonArr[i, k] = 0;
+                        int IndexUpCompress = i;
+                        for (int p = IndexUpCompress; p > 0; p--)
+                        {
+                            CommonData.CommonArr[p, k] = CommonData.CommonArr[p - 1, k];
+                        }
                     }
-                }
 
+
+                }
                 if (IsOk)
                 {
                     Line += 1;

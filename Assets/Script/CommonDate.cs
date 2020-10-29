@@ -38,6 +38,10 @@ public static class CommonData
     public static float timeforLogoTetris;
     public static bool Tetris_Logo_bool;
     public static GameObject[,]PoolCubes;
+    public static float skalecoef;
+    public static bool reversforpulse;
+    public static float countforpulse;
+    public static bool pulseactive;
 
 
 }
