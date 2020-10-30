@@ -56,8 +56,8 @@ public class Main : MonoBehaviour
         }
         if (CommonData.pulseactive)
         {
-            Selectlines();
-            if (CommonData.countforpulse >= 2)
+            Animationlines();
+            if (CommonData.countforpulse >= 4)
             {
                 CommonData.pulseactive = false;
                 CommonData.compressactive = true;
@@ -237,7 +237,7 @@ public class Main : MonoBehaviour
         CommonData.Line = 0;
         CommonData.Score = 0;
     }
-    void Selectlines()
+    void Animationlines()
     {
         if (CommonData.skalecoef < 0.5f && !CommonData.reversforpulse)
         {
