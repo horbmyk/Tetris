@@ -40,7 +40,7 @@ public static class CommonData
     public static GameObject[,]PoolCubes;
     public static float skalecoef;
     public static bool reversforpulse;
-    public static float countforpulse;
+    public static float countforanimation;
     public static bool pulseactive;
     public static bool compressactive;
     public static bool stepafteranimation;

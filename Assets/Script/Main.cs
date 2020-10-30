@@ -53,11 +53,11 @@ public class Main : MonoBehaviour
             ResetPosition();
             CommonData.timestep_Go = false;
             CommonData.pulseactive = true;
-            CommonData.countforpulse = 0;
+            CommonData.countforanimation = 0;
         }
         if (CommonData.pulseactive)
-        {            
-            Animationlines();
+        {
+           Animationlines();
         }
         if (CommonData.compressactive)
         {
@@ -66,7 +66,7 @@ public class Main : MonoBehaviour
         }
         CommonData.timestep += Time.deltaTime;
         CommonData.timeforLogoTetris += Time.deltaTime;
-        CommonData.countforpulse += Time.deltaTime;
+        CommonData.countforanimation += Time.deltaTime;
         timeCountForHighSpeed += Time.deltaTime;
         timeCountForAvtoDown += Time.deltaTime;
 
@@ -269,7 +269,7 @@ public class Main : MonoBehaviour
                 {
                     CommonData.PoolCubes[i, k].transform.localScale = new Vector3(+CommonData.skalecoef, +CommonData.skalecoef, +CommonData.skalecoef);
                 }
-                if (CommonData.countforpulse >= 4)
+                if (CommonData.countforanimation >= 4)
                 {
                     CommonData.pulseactive = false;
                     CommonData.compressactive = true;
@@ -293,8 +293,6 @@ public class Main : MonoBehaviour
         }
 
     }
-
-
 }
 public class Cell
 {
@@ -425,7 +423,6 @@ public class NextElement
 {
     public StateBlockTetris GeneretedSBT(int RandNum)
     {
-        Debug.Log("next");
         StateBlockTetris stateBlockTetris = null;
         if (RandNum == 1)
         {
