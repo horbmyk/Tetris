@@ -47,6 +47,7 @@ public class Main : MonoBehaviour
     }
     void Update()
     {
+        Debug.Log(CommonData.rotatecoef);
         if (CommonData.timestep >= 0.35 && CommonData.timestep_Go&&CommonData.stepafteranimation)
         {
             Next_Element(blockController);
@@ -231,22 +232,6 @@ public class Main : MonoBehaviour
     }
     void Animationlines()
     {
-        if (CommonData.skalecoef < 0.5f && !CommonData.reversforpulse)
-        {
-            CommonData.skalecoef += 0.005f;
-            if (CommonData.skalecoef >= 0.5)
-            {
-                CommonData.reversforpulse = true;
-            }
-        }
-        if (CommonData.reversforpulse)
-        {
-            CommonData.skalecoef -= 0.005f;
-            if (CommonData.skalecoef <= 0.25f)
-            {
-                CommonData.reversforpulse = false;
-            }
-        }
         bool IsOk = false;
         for (int i = CommonData.Height - 1; i >= 0; i--)
         {
@@ -265,9 +250,12 @@ public class Main : MonoBehaviour
             if (IsOk)
             {
                 CommonData.stepafteranimation = false;
+                setanimation();
                 for (int k = 0; k < CommonData.Lenght; k++)
                 {
                     CommonData.PoolCubes[i, k].transform.localScale = new Vector3(+CommonData.skalecoef, +CommonData.skalecoef, +CommonData.skalecoef);
+                    //CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(+CommonData.rotatecoef,+0,+0);
+
                 }
                 if (CommonData.countforanimation >= 4)
                 {
@@ -281,6 +269,30 @@ public class Main : MonoBehaviour
 
             }
         }
+    }
+    void setanimation()
+    {
+        if (CommonData.skalecoef < 0.5f && !CommonData.reversforpulse)
+        {
+            CommonData.skalecoef += 0.005f;
+            if (CommonData.skalecoef >= 0.5)
+            {
+                CommonData.reversforpulse = true;
+            }
+        }
+        if (CommonData.reversforpulse)
+        {
+            CommonData.skalecoef -= 0.005f;
+            if (CommonData.skalecoef <= 0.25f)
+            {
+                CommonData.reversforpulse = false;
+            }
+        }
+        if (CommonData.rotatecoef < 180)
+        {
+            CommonData.rotatecoef += 1f;
+        }
+
     }
     void default_position()
     {

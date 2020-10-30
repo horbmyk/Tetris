@@ -44,6 +44,7 @@ public static class CommonData
     public static bool pulseactive;
     public static bool compressactive;
     public static bool stepafteranimation;
+    public static float rotatecoef;
 
 
 }
