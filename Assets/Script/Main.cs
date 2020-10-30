@@ -28,6 +28,7 @@ public class Main : MonoBehaviour
         CommonData.Tetris_Logo_bool = false;
         CommonData.pulseactive = false;
         CommonData.compressactive = false;
+        CommonData.stepafteranimation = true;
         CommonData.CommonArr = new int[CommonData.Height, CommonData.Lenght];
         CommonData.PoolCubes = new GameObject[CommonData.Height, CommonData.Lenght];
 
@@ -46,7 +47,7 @@ public class Main : MonoBehaviour
     }
     void Update()
     {
-        if (CommonData.timestep >= 0.35 && CommonData.timestep_Go)
+        if (CommonData.timestep >= 0.35 && CommonData.timestep_Go&&CommonData.stepafteranimation)
         {
             Next_Element(blockController);
             ResetPosition();
@@ -55,23 +56,14 @@ public class Main : MonoBehaviour
             CommonData.countforpulse = 0;
         }
         if (CommonData.pulseactive)
-        {
+        {            
             Animationlines();
-            if (CommonData.countforpulse >= 4)
-            {
-                CommonData.pulseactive = false;
-                CommonData.compressactive = true;
-                default_position();
-            }
-
         }
         if (CommonData.compressactive)
         {
-            //blockController.CompressLine();
-            //CommonData.compressactive = false;
+            blockController.CompressLine();
+            CommonData.compressactive = false;
         }
-
-
         CommonData.timestep += Time.deltaTime;
         CommonData.timeforLogoTetris += Time.deltaTime;
         CommonData.countforpulse += Time.deltaTime;
@@ -272,10 +264,21 @@ public class Main : MonoBehaviour
             }
             if (IsOk)
             {
+                CommonData.stepafteranimation = false;
                 for (int k = 0; k < CommonData.Lenght; k++)
                 {
                     CommonData.PoolCubes[i, k].transform.localScale = new Vector3(+CommonData.skalecoef, +CommonData.skalecoef, +CommonData.skalecoef);
                 }
+                if (CommonData.countforpulse >= 4)
+                {
+                    CommonData.pulseactive = false;
+                    CommonData.compressactive = true;
+                    CommonData.stepafteranimation = true;
+                    default_position();
+                }
+
+
+
             }
         }
     }
@@ -422,6 +425,7 @@ public class NextElement
 {
     public StateBlockTetris GeneretedSBT(int RandNum)
     {
+        Debug.Log("next");
         StateBlockTetris stateBlockTetris = null;
         if (RandNum == 1)
         {
