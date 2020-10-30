@@ -41,10 +41,10 @@ public static class CommonData
     public static float skalecoef;
     public static bool reversforpulse;
     public static float countforanimation;
-    public static bool pulseactive;
+    public static bool animationactive;
     public static bool compressactive;
     public static bool stepafteranimation;
-    public static float rotatecoef;
+    public static int rotatecoef;
 
 
 }

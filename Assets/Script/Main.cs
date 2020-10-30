@@ -26,7 +26,7 @@ public class Main : MonoBehaviour
         CommonData.Play = true;
         CommonData.timestep_Go = false;
         CommonData.Tetris_Logo_bool = false;
-        CommonData.pulseactive = false;
+        CommonData.animationactive = false;
         CommonData.compressactive = false;
         CommonData.stepafteranimation = true;
         CommonData.CommonArr = new int[CommonData.Height, CommonData.Lenght];
@@ -47,18 +47,19 @@ public class Main : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(CommonData.rotatecoef);
-        if (CommonData.timestep >= 0.35 && CommonData.timestep_Go&&CommonData.stepafteranimation)
+
+        if (CommonData.timestep >= 0.35 && CommonData.timestep_Go && CommonData.stepafteranimation)
         {
             Next_Element(blockController);
             ResetPosition();
             CommonData.timestep_Go = false;
-            CommonData.pulseactive = true;
+            CommonData.animationactive = true;
+
             CommonData.countforanimation = 0;
         }
-        if (CommonData.pulseactive)
+        if (CommonData.animationactive)
         {
-           Animationlines();
+            Animationlines();
         }
         if (CommonData.compressactive)
         {
@@ -254,12 +255,11 @@ public class Main : MonoBehaviour
                 for (int k = 0; k < CommonData.Lenght; k++)
                 {
                     CommonData.PoolCubes[i, k].transform.localScale = new Vector3(+CommonData.skalecoef, +CommonData.skalecoef, +CommonData.skalecoef);
-                    //CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(+CommonData.rotatecoef,+0,+0);
-
+                   // CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(+CommonData.rotatecoef, +0, +0);
                 }
-                if (CommonData.countforanimation >= 4)
+                if (CommonData.countforanimation >= 3)
                 {
-                    CommonData.pulseactive = false;
+                    CommonData.animationactive = false;
                     CommonData.compressactive = true;
                     CommonData.stepafteranimation = true;
                     default_position();
@@ -288,10 +288,12 @@ public class Main : MonoBehaviour
                 CommonData.reversforpulse = false;
             }
         }
-        if (CommonData.rotatecoef < 180)
+
+       // if (CommonData.rotatecoef < 355)
         {
-            CommonData.rotatecoef += 1f;
+            CommonData.rotatecoef += 5;
         }
+
 
     }
     void default_position()
@@ -301,9 +303,10 @@ public class Main : MonoBehaviour
             for (int k = 0; k < CommonData.Lenght; k++)
             {
                 CommonData.PoolCubes[i, k].transform.localScale = new Vector3(0.3353f, 0.3353f, 0.3353f);
+                CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(-90, 0, 0);
             }
         }
-
+        CommonData.rotatecoef = 0;
     }
 }
 public class Cell
