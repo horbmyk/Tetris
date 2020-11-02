@@ -14,6 +14,7 @@ class Element_seven_State_1 : StateBlockTetris
         Casper();
         CommonData.timestep = 0;
         CommonData.timestep_Go = false;
+        CommonData.animationactive = false;
     }
     public override void Left()
     {
@@ -228,7 +229,7 @@ class Element_seven_State_2 : StateBlockTetris
         Casper();
         CommonData.timestep = 0;
         CommonData.timestep_Go = false;
-
+        CommonData.animationactive = false;
     }
     public override void Left()
     {

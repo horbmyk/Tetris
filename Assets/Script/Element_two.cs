@@ -13,6 +13,7 @@ public class Element_two_State__1 : StateBlockTetris
         Casper();
         CommonData.timestep = 0;
         CommonData.timestep_Go = false;
+        CommonData.animationactive = false;
     }
     public override void Left()
     {
@@ -256,6 +257,7 @@ public class Element_two_State__2 : StateBlockTetris
         Casper();
         CommonData.timestep = 0;
         CommonData.timestep_Go = false;
+        CommonData.animationactive = false;
     }
     public override void Left()
     {
@@ -508,6 +510,7 @@ public class Element_two_State__3 : StateBlockTetris
         Casper();
         CommonData.timestep = 0;
         CommonData.timestep_Go = false;
+        CommonData.animationactive = false;
     }
     public override void Left()
     {
@@ -754,6 +757,7 @@ public class Element_two_State__4 : StateBlockTetris
         Casper();
         CommonData.timestep = 0;
         CommonData.timestep_Go = false;
+        CommonData.animationactive = false;
     }
     public override void Left()
     {

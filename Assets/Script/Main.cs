@@ -31,7 +31,6 @@ public class Main : MonoBehaviour
         CommonData.stepafteranimation = true;
         CommonData.CommonArr = new int[CommonData.Height, CommonData.Lenght];
         CommonData.PoolCubes = new GameObject[CommonData.Height, CommonData.Lenght];
-
         for (int i = 0; i < CommonData.Height; i++)
         {
             for (int k = 0; k < CommonData.Lenght; k++)
@@ -47,41 +46,35 @@ public class Main : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(CommonData.countforanimation);
         if (CommonData.timestep >= 0.35 && CommonData.timestep_Go && CommonData.stepafteranimation)
         {
             Next_Element(blockController);
             ResetPosition();
             CommonData.timestep_Go = false;
-            CommonData.countforanimation = 0;//
-
         }
         CommonData.timestep += Time.deltaTime;
         CommonData.timeforLogoTetris += Time.deltaTime;
         CommonData.countforanimation += Time.deltaTime;
         timeCountForHighSpeed += Time.deltaTime;
         timeCountForAvtoDown += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.R))//
-        {
-            CommonData.countforanimation = 0;
-        }
+
         if (CommonData.animationactive)
-        {           
+        {
             Animationlines();
         }
+
         if (CommonData.compressactive)
         {
             blockController.CompressLine();
             CommonData.compressactive = false;
         }
 
-        if (timeCountForAvtoDown > TimeLevelCount && CommonData.Play)
+        if (timeCountForAvtoDown > TimeLevelCount && CommonData.stepafteranimation && CommonData.Play)
         {
             blockController.DownAuto();
-
             if (CommonData.timestep_Go)
             {
-                //CommonData.countforanimation = 0;
+                CommonData.countforanimation = 0;
                 CommonData.animationactive = true;
             }
             ResetPosition();
@@ -92,7 +85,6 @@ public class Main : MonoBehaviour
             if (timeCountForHighSpeed > 0.1)
             {
                 blockController.Right();
-                CommonData.animationactive = false;
                 timeCountForHighSpeed = 0;
                 ResetPosition();
             }
@@ -102,7 +94,6 @@ public class Main : MonoBehaviour
             if (timeCountForHighSpeed > 0.1)
             {
                 blockController.Left();
-                CommonData.animationactive = false;
                 timeCountForHighSpeed = 0;
                 ResetPosition();
             }
@@ -110,7 +101,7 @@ public class Main : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow) && CommonData.Play)
         {
             blockController.DownOneStep();
-            //CommonData.countforanimation = 0;
+            CommonData.countforanimation = 0;
             CommonData.animationactive = true;
             ResetPosition();
         }
@@ -273,7 +264,7 @@ public class Main : MonoBehaviour
                     // CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(+CommonData.rotatecoef, +0, +0);
 
                 }
-                if (CommonData.countforanimation >= 3)
+                if (CommonData.countforanimation >= 1.2f)
                 {
                     CommonData.animationactive = false;
                     CommonData.compressactive = true;
@@ -301,7 +292,6 @@ public class Main : MonoBehaviour
                 CommonData.reversforpulse = false;
             }
         }
-
         // if (CommonData.rotatecoef < 355)
         {
             CommonData.rotatecoef += 5;

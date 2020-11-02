@@ -104,7 +104,6 @@ public class Hint : MonoBehaviour
             }
         }
         number = Random.Range(1, 20);
-        number = 2;
         switch (number)
         {
             case 1:
