@@ -47,18 +47,26 @@ public class Main : MonoBehaviour
     }
     void Update()
     {
-
+        Debug.Log(CommonData.countforanimation);
         if (CommonData.timestep >= 0.35 && CommonData.timestep_Go && CommonData.stepafteranimation)
         {
             Next_Element(blockController);
             ResetPosition();
             CommonData.timestep_Go = false;
-            CommonData.animationactive = true;
+            CommonData.countforanimation = 0;//
 
+        }
+        CommonData.timestep += Time.deltaTime;
+        CommonData.timeforLogoTetris += Time.deltaTime;
+        CommonData.countforanimation += Time.deltaTime;
+        timeCountForHighSpeed += Time.deltaTime;
+        timeCountForAvtoDown += Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.R))//
+        {
             CommonData.countforanimation = 0;
         }
         if (CommonData.animationactive)
-        {
+        {           
             Animationlines();
         }
         if (CommonData.compressactive)
@@ -66,15 +74,16 @@ public class Main : MonoBehaviour
             blockController.CompressLine();
             CommonData.compressactive = false;
         }
-        CommonData.timestep += Time.deltaTime;
-        CommonData.timeforLogoTetris += Time.deltaTime;
-        CommonData.countforanimation += Time.deltaTime;
-        timeCountForHighSpeed += Time.deltaTime;
-        timeCountForAvtoDown += Time.deltaTime;
 
         if (timeCountForAvtoDown > TimeLevelCount && CommonData.Play)
         {
             blockController.DownAuto();
+
+            if (CommonData.timestep_Go)
+            {
+                //CommonData.countforanimation = 0;
+                CommonData.animationactive = true;
+            }
             ResetPosition();
             timeCountForAvtoDown = 0;
         }
@@ -83,6 +92,7 @@ public class Main : MonoBehaviour
             if (timeCountForHighSpeed > 0.1)
             {
                 blockController.Right();
+                CommonData.animationactive = false;
                 timeCountForHighSpeed = 0;
                 ResetPosition();
             }
@@ -92,6 +102,7 @@ public class Main : MonoBehaviour
             if (timeCountForHighSpeed > 0.1)
             {
                 blockController.Left();
+                CommonData.animationactive = false;
                 timeCountForHighSpeed = 0;
                 ResetPosition();
             }
@@ -99,6 +110,8 @@ public class Main : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow) && CommonData.Play)
         {
             blockController.DownOneStep();
+            //CommonData.countforanimation = 0;
+            CommonData.animationactive = true;
             ResetPosition();
         }
 
@@ -106,6 +119,7 @@ public class Main : MonoBehaviour
         {
             CommonData.ResetCasper();
             blockController.Rotate();
+            CommonData.animationactive = false;
             ResetPosition();
         }
         if (Input.GetKeyDown(KeyCode.Return))
@@ -117,6 +131,7 @@ public class Main : MonoBehaviour
         {
             Application.Quit();
         }
+
         Line.text = "Line " + CommonData.Line;
         Score.text = "Score " + CommonData.Score;
         LevelTimeAvtoDownStep();
@@ -255,7 +270,8 @@ public class Main : MonoBehaviour
                 for (int k = 0; k < CommonData.Lenght; k++)
                 {
                     CommonData.PoolCubes[i, k].transform.localScale = new Vector3(+CommonData.skalecoef, +CommonData.skalecoef, +CommonData.skalecoef);
-                   // CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(+CommonData.rotatecoef, +0, +0);
+                    // CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(+CommonData.rotatecoef, +0, +0);
+
                 }
                 if (CommonData.countforanimation >= 3)
                 {
@@ -264,9 +280,6 @@ public class Main : MonoBehaviour
                     CommonData.stepafteranimation = true;
                     default_position();
                 }
-
-
-
             }
         }
     }
@@ -289,12 +302,10 @@ public class Main : MonoBehaviour
             }
         }
 
-       // if (CommonData.rotatecoef < 355)
+        // if (CommonData.rotatecoef < 355)
         {
             CommonData.rotatecoef += 5;
         }
-
-
     }
     void default_position()
     {
