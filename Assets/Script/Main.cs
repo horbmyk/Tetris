@@ -388,9 +388,8 @@ public class BlockController
                 {
                     for (int k = 0; k < CommonData.Lenght; k++)
                     {
-                        // CommonData.CommonArr[i, k] = 0;
-                        int IndexUpCompress = i;
-                        for (int p = IndexUpCompress; p > 0; p--)
+
+                        for (int p = i; p > 0; p--)
                         {
                             CommonData.CommonArr[p, k] = CommonData.CommonArr[p - 1, k];
                         }
