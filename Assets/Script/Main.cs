@@ -341,6 +341,8 @@ public class BlockController
     public StateBlockTetris stateBlockTetris;
     public int Line = 0;
     public int Score = 0;
+    bool IsOk;
+
 
     public void Left()
     {
@@ -367,9 +369,11 @@ public class BlockController
         CommonData.Logo_Tetris.SetActive(false);
         Line = 0;
         Score = 0;
-        for (int m = CommonData.Height - 1; m > 0; m--)//?While ??
+        //for (int m = CommonData.Height - 1; m > 0; m--)//?While ??
+
+        IsOk = true;
+        while (IsOk)
         {
-            bool IsOk = false;
             for (int i = CommonData.Height - 1; i >= 0; i--)
             {
                 for (int k = 0; k < CommonData.Lenght; k++)
