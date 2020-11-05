@@ -260,11 +260,11 @@ public class Main : MonoBehaviour
                 setanimation();
                 for (int k = 0; k < CommonData.Lenght; k++)
                 {
-                    //CommonData.PoolCubes[i, k].transform.localScale = new Vector3(+CommonData.skalecoef, +CommonData.skalecoef, +CommonData.skalecoef);
-                    //  CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(+CommonData.rotatecoef, +0, +0);
-                    CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(-CommonData.rotatecoef_2, 90, -90);
+                    CommonData.PoolCubes[i, k].transform.localScale = new Vector3(+CommonData.skalecoef, +CommonData.skalecoef, +CommonData.skalecoef);
+                    // CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(+CommonData.rotatecoef, +0, +0);
+
                 }
-                if (CommonData.countforanimation >= 1.2)
+                if (CommonData.countforanimation >= 1.2f)
                 {
                     CommonData.animationactive = false;
                     CommonData.compressactive = true;
@@ -294,10 +294,7 @@ public class Main : MonoBehaviour
         }
         // if (CommonData.rotatecoef < 355)
         {
-            CommonData.rotatecoef += 2;
-        }
-        {
-            CommonData.rotatecoef_2 += 2;
+            CommonData.rotatecoef += 5;
         }
     }
     void default_position()
@@ -311,7 +308,6 @@ public class Main : MonoBehaviour
             }
         }
         CommonData.rotatecoef = 0;
-        CommonData.rotatecoef_2 = 0;
     }
 }
 public class Cell
@@ -345,7 +341,6 @@ public class BlockController
     public StateBlockTetris stateBlockTetris;
     public int Line = 0;
     public int Score = 0;
-    bool IsOk = false;
 
     public void Left()
     {
@@ -372,14 +367,11 @@ public class BlockController
         CommonData.Logo_Tetris.SetActive(false);
         Line = 0;
         Score = 0;
-        //for (int m = CommonData.Height - 1; m > 0; m--)//?While ??
-        IsOk = true;
-        int CountLine = 0;
-        while (IsOk)
+        for (int m = CommonData.Height - 1; m > 0; m--)//?While ??
         {
+            bool IsOk = false;
             for (int i = CommonData.Height - 1; i >= 0; i--)
             {
-
                 for (int k = 0; k < CommonData.Lenght; k++)
                 {
                     if (CommonData.CommonArr[i, k] > 0)
@@ -389,24 +381,16 @@ public class BlockController
                     else
                     {
                         IsOk = false;
-                        // Debug.Log(i);
-                        break;//
+                        break;
                     }
-
-
                 }
-                //  Debug.Log("i= " + i + " " + IsOk);
-                if (IsOk)
-                {
-                    CountLine++;
-                    // Debug.Log("Count= " + CountLine);
-                }
-                //  Debug.Log("i= " + i + " " + IsOk);
                 if (IsOk)
                 {
                     for (int k = 0; k < CommonData.Lenght; k++)
                     {
-                        for (int p = i; p > 0; p--)
+                        // CommonData.CommonArr[i, k] = 0;
+                        int IndexUpCompress = i;
+                        for (int p = IndexUpCompress; p > 0; p--)
                         {
                             CommonData.CommonArr[p, k] = CommonData.CommonArr[p - 1, k];
                         }
@@ -417,10 +401,7 @@ public class BlockController
                     Line += 1;
                     CommonData.Line += 1;
                 }
-
             }
-            CountLine = 0;
-
         }
         switch (Line)
         {
@@ -444,10 +425,8 @@ public class BlockController
                 CommonData.Tetris_Logo_bool = true;
                 CommonData.Logo_Tetris.SetActive(true);
                 break;
+
         }
-
-
-
         CommonData.Score += Score;
 
     }
