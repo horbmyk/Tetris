@@ -17,7 +17,6 @@ public class Main : MonoBehaviour
     public Text Level;
     public GameObject Logo_Game_Over;
     public GameObject Logo_Tetris;
-    bool Animation_fall_line;
     void Start()
     {
         CommonData.Logo_GameOver = Logo_Game_Over;
@@ -27,7 +26,8 @@ public class Main : MonoBehaviour
         CommonData.Play = true;
         CommonData.timestep_Go = false;
         CommonData.Tetris_Logo_bool = false;
-        CommonData.animationactive = false;
+        CommonData.animation_1_active = false;
+        CommonData.animation_2_active = false;
         CommonData.compressactive = false;
         CommonData.stepafteranimation = true;
         CommonData.CommonArr = new int[CommonData.Height, CommonData.Lenght];
@@ -47,12 +47,6 @@ public class Main : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Animation_fall_line = !Animation_fall_line;
-
-        }
-        Debug.Log(Animation_fall_line);
         if (CommonData.timestep >= 0.35 && CommonData.timestep_Go && CommonData.stepafteranimation)
         {
             Next_Element(blockController);
@@ -65,9 +59,21 @@ public class Main : MonoBehaviour
         timeCountForHighSpeed += Time.deltaTime;
         timeCountForAvtoDown += Time.deltaTime;
 
-        if (CommonData.animationactive)
+        if (CommonData.animation_1_active)
         {
-            Animationlines();
+            Animation_1_lines();
+        }
+        if (CommonData.animation_2_active)
+        {
+            Debug.Log("2");
+
+
+            CommonData.animation_2_active = false;
+
+            CommonData.animation_1_active = false;//
+            CommonData.compressactive = true;//
+            CommonData.stepafteranimation = true;//
+
         }
 
         if (CommonData.compressactive)
@@ -82,7 +88,7 @@ public class Main : MonoBehaviour
             if (CommonData.timestep_Go)
             {
                 CommonData.countforanimation = 0;
-                CommonData.animationactive = true;
+                CommonData.animation_1_active = true;
             }
             ResetPosition();
             timeCountForAvtoDown = 0;
@@ -109,7 +115,7 @@ public class Main : MonoBehaviour
         {
             blockController.DownOneStep();
             CommonData.countforanimation = 0;
-            CommonData.animationactive = true;
+            CommonData.animation_1_active = true;
             ResetPosition();
         }
 
@@ -117,7 +123,7 @@ public class Main : MonoBehaviour
         {
             CommonData.ResetCasper();
             blockController.Rotate();
-            CommonData.animationactive = false;
+            CommonData.animation_1_active = false;
             ResetPosition();
         }
         if (Input.GetKeyDown(KeyCode.Return))
@@ -244,7 +250,7 @@ public class Main : MonoBehaviour
         CommonData.Line = 0;
         CommonData.Score = 0;
     }
-    void Animationlines()
+    void Animation_1_lines()
     {
         bool IsOk = false;
         for (int i = CommonData.Height - 1; i >= 0; i--)
@@ -274,21 +280,12 @@ public class Main : MonoBehaviour
                 if (CommonData.countforanimation >= 1.2f)
                 {
                     default_position();
-
-                    if (Animation_fall_line)
-                    {
-
-                        CommonData.animationactive = false;
-                        CommonData.compressactive = true;
-
-                        CommonData.stepafteranimation = true;
-                    }
-
-
+                    CommonData.animation_2_active = true;
 
                 }
             }
         }
+
     }
     void setanimation()
     {
@@ -325,6 +322,15 @@ public class Main : MonoBehaviour
         }
         CommonData.rotatecoef = 0;
     }
+    //IEnumerator anim_fall_lines()
+    //{
+
+
+
+    //    yield return WaitForSeconds(1f);
+    //}
+
+
 }
 public class Cell
 {
@@ -382,6 +388,7 @@ public class BlockController
     }
     public void CompressLine()
     {
+        Debug.Log("Compress");
         Line = 0;
         Score = 0;
         for (int i = CommonData.Height - 1; i >= 0; i--)
@@ -402,11 +409,11 @@ public class BlockController
             {
                 for (int k = 0; k < CommonData.Lenght; k++)
                 {
-                    CommonData.CommonArr[i, k] = 0;
-                    //for (int p = i; p > 0; p--)
-                    //{
-                    //    CommonData.CommonArr[p, k] = CommonData.CommonArr[p - 1, k];
-                    //}
+                    //   CommonData.CommonArr[i, k] = 0;
+                    for (int p = i; p > 0; p--)
+                    {
+                        CommonData.CommonArr[p, k] = CommonData.CommonArr[p - 1, k];
+                    }
                 }
             }
             if (IsOk)
