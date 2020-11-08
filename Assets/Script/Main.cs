@@ -17,6 +17,7 @@ public class Main : MonoBehaviour
     public Text Level;
     public GameObject Logo_Game_Over;
     public GameObject Logo_Tetris;
+    bool Animation_fall_line;
     void Start()
     {
         CommonData.Logo_GameOver = Logo_Game_Over;
@@ -46,6 +47,12 @@ public class Main : MonoBehaviour
     }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Animation_fall_line = !Animation_fall_line;
+
+        }
+        Debug.Log(Animation_fall_line);
         if (CommonData.timestep >= 0.35 && CommonData.timestep_Go && CommonData.stepafteranimation)
         {
             Next_Element(blockController);
@@ -266,10 +273,19 @@ public class Main : MonoBehaviour
                 }
                 if (CommonData.countforanimation >= 1.2f)
                 {
-                    CommonData.animationactive = false;
-                    CommonData.compressactive = true;
-                    CommonData.stepafteranimation = true;
                     default_position();
+
+                    if (Animation_fall_line)
+                    {
+
+                        CommonData.animationactive = false;
+                        CommonData.compressactive = true;
+
+                        CommonData.stepafteranimation = true;
+                    }
+
+
+
                 }
             }
         }
