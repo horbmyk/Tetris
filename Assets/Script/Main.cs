@@ -366,46 +366,48 @@ public class BlockController
     }
     public void CompressLine()
     {
-        CommonData.Logo_Tetris.SetActive(false);
         Line = 0;
         Score = 0;
-        //for (int m = CommonData.Height - 1; m > 0; m--)//?While ??
-
-        IsOk = true;
-        while (IsOk)
+        for (int i = CommonData.Height - 1; i >= 0; i--)
         {
-            for (int i = CommonData.Height - 1; i >= 0; i--)
+            for (int k = 0; k < CommonData.Lenght; k++)
+            {
+                if (CommonData.CommonArr[i, k] > 0)
+                {
+                    IsOk = true;
+                }
+                else
+                {
+                    IsOk = false;
+                    break;
+                }
+            }
+            if (IsOk)
             {
                 for (int k = 0; k < CommonData.Lenght; k++)
                 {
-                    if (CommonData.CommonArr[i, k] > 0)
-                    {
-                        IsOk = true;
-                    }
-                    else
-                    {
-                        IsOk = false;
-                        break;
-                    }
-                }
-                if (IsOk)
-                {
-                    for (int k = 0; k < CommonData.Lenght; k++)
-                    {
-
-                        for (int p = i; p > 0; p--)
-                        {
-                            CommonData.CommonArr[p, k] = CommonData.CommonArr[p - 1, k];
-                        }
-                    }
-                }
-                if (IsOk)
-                {
-                    Line += 1;
-                    CommonData.Line += 1;
+                    CommonData.CommonArr[i, k] = 0;
+                    //for (int p = i; p > 0; p--)
+                    //{
+                    //    CommonData.CommonArr[p, k] = CommonData.CommonArr[p - 1, k];
+                    //}
                 }
             }
+            if (IsOk)
+            {
+                Line += 1;
+                CommonData.Line += 1;
+            }
         }
+        CountScore();
+    }
+    public void GameOverPrint()
+    {
+        CommonData.Logo_GameOver.SetActive(true);
+    }
+    void CountScore()
+    {
+        CommonData.Logo_Tetris.SetActive(false);
         switch (Line)
         {
             case 1:
@@ -432,10 +434,6 @@ public class BlockController
         }
         CommonData.Score += Score;
 
-    }
-    public void GameOverPrint()
-    {
-        CommonData.Logo_GameOver.SetActive(true);
     }
 }
 public class NextElement
