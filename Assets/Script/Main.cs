@@ -427,10 +427,9 @@ public class BlockController
     }
     public void CompressLine()
     {
-        Debug.Log("Compress");
         Line = 0;
         Score = 0;
-        for (int i = CommonData.Height - 1; i >= 0; i--)
+        for (int i = 0; i < CommonData.Height; i++)
         {
             for (int k = 0; k < CommonData.Lenght; k++)
             {
@@ -448,7 +447,6 @@ public class BlockController
             {
                 for (int k = 0; k < CommonData.Lenght; k++)
                 {
-                    
                     for (int p = i; p > 0; p--)
                     {
                         CommonData.CommonArr[p, k] = CommonData.CommonArr[p - 1, k];
