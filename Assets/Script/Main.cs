@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 //Cube prefab
 //bluelementrotate
+//Блокувати лишні клавіші
 public class Main : MonoBehaviour
 {
     public GameObject CubePrefab;
@@ -65,21 +66,17 @@ public class Main : MonoBehaviour
         }
         if (CommonData.animation_2_active)
         {
-            Debug.Log("2");
-
-
+            StartCoroutine(anim_fall_lines());
             CommonData.animation_2_active = false;
-
-            CommonData.animation_1_active = false;//
-            CommonData.compressactive = true;//
-            CommonData.stepafteranimation = true;//
-
+            CommonData.animation_1_active = false;
         }
 
         if (CommonData.compressactive)
         {
             blockController.CompressLine();
             CommonData.compressactive = false;
+            CommonData.stepafteranimation = true;
+
         }
 
         if (timeCountForAvtoDown > TimeLevelCount && CommonData.stepafteranimation && CommonData.Play)
@@ -322,13 +319,21 @@ public class Main : MonoBehaviour
         }
         CommonData.rotatecoef = 0;
     }
-    //IEnumerator anim_fall_lines()
-    //{
+    IEnumerator anim_fall_lines()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            Debug.Log("in");
+            yield return new WaitForSeconds(1f);
+            if (i == 4)
+            {
+                 CommonData.compressactive = true;
+            }
+        }
 
 
 
-    //    yield return WaitForSeconds(1f);
-    //}
+    }
 
 
 }
@@ -409,7 +414,7 @@ public class BlockController
             {
                 for (int k = 0; k < CommonData.Lenght; k++)
                 {
-                    //   CommonData.CommonArr[i, k] = 0;
+                    //CommonData.CommonArr[i, k] = 0;
                     for (int p = i; p > 0; p--)
                     {
                         CommonData.CommonArr[p, k] = CommonData.CommonArr[p - 1, k];
