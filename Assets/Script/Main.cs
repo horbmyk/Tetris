@@ -18,6 +18,7 @@ public class Main : MonoBehaviour
     public Text Level;
     public GameObject Logo_Game_Over;
     public GameObject Logo_Tetris;
+    bool Anim_Full;
     void Start()
     {
         CommonData.Logo_GameOver = Logo_Game_Over;
@@ -48,6 +49,7 @@ public class Main : MonoBehaviour
     }
     void Update()
     {
+
         if (CommonData.timestep >= 0.35 && CommonData.timestep_Go && CommonData.stepafteranimation)
         {
             Next_Element(blockController);
@@ -311,14 +313,14 @@ public class Main : MonoBehaviour
     }
     void default_position()
     {
-        //for (int i = CommonData.Height - 1; i >= 0; i--)//
-        //{
-        //    for (int k = 0; k < CommonData.Lenght; k++)//
-        //    {
-        //        CommonData.PoolCubes[i, k].transform.localScale = new Vector3(0.3353f, 0.3353f, 0.3353f);//
-        //        CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(-90, 0, 0);
-        //    }
-        //}
+        for (int i = CommonData.Height - 1; i >= 0; i--)//
+        {
+            for (int k = 0; k < CommonData.Lenght; k++)//
+            {
+                //CommonData.PoolCubes[i, k].transform.localScale = new Vector3(0.3353f, 0.3353f, 0.3353f);//
+                CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(-90, 0, 0);
+            }
+        }
         bool IsOk = false;
         for (int i = CommonData.Height - 1; i >= 0; i--)
         {
@@ -338,31 +340,59 @@ public class Main : MonoBehaviour
             {
                 for (int k = 0; k < CommonData.Lenght; k++)
                 {
-
-                    CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(-205, 90, -90);
+                    //CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(-205, 90, -90);
+                    CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.gray;
 
                 }
             }
         }
-
-
-
-
-
 
         CommonData.rotatecoef = 0;
         CommonData.rotatecoef_2 = 0;
     }
     IEnumerator anim_fall_lines()
     {
-        // for (int i = 0; i < 5; i++)
+        for (int i = 0; i < CommonData.Height; i++)
+        {
+            for (int k = 0; k < CommonData.Lenght; k++)
+            {
+                if (CommonData.CommonArr[i, k] > 0)
+                {
+                    Anim_Full = true;
+                }
+                else
+                {
+                    Anim_Full = false;
+                    break;
+                }
+            }
+            if (Anim_Full)
+            {
+                Debug.Log("in");
+                //for (int k = 0; k < CommonData.Lenght; k++)
+                {
+                    //for (int p = i; p > 0; p--)
+                    //{
+                    //    CommonData.PoolCubes[i, k].transform.position = new Vector3(i + 1, 0, k);//
+                    //}
+
+                    yield return new WaitForSeconds(2f);
+
+                    // if (k == CommonData.Lenght - 1)
+                    {
+                    }
+                }
+
+            }
+        }
+        Anim_Full = false;
+        CommonData.compressactive = true;
+
+
+
+
         {
 
-            yield return new WaitForSeconds(0.5f);
-            //if (i == 4)
-            {
-                CommonData.compressactive = true;
-            }
         }
 
 
@@ -427,8 +457,10 @@ public class BlockController
     }
     public void CompressLine()
     {
+        Debug.Log("Compress");
         Line = 0;
         Score = 0;
+
         for (int i = 0; i < CommonData.Height; i++)
         {
             for (int k = 0; k < CommonData.Lenght; k++)
