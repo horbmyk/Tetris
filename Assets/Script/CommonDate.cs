@@ -46,6 +46,6 @@ public static class CommonData
     public static bool compressactive;
     public static bool stepafteranimation;
     public static int rotatecoef;
-
+    public static int rotatecoef_2;
 
 }

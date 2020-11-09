@@ -181,7 +181,7 @@ public class Main : MonoBehaviour
             for (int k = 0; k < CommonData.Lenght; k++)
             {
                 CommonData.PoolCubes[i, k].transform.position = new Vector3(i, 0, k);
-
+                CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(-90, 0, 0);
                 if (CommonData.CommonArr[i, k] == 0)
                 {
                     //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.white;
@@ -270,8 +270,9 @@ public class Main : MonoBehaviour
                 setanimation();
                 for (int k = 0; k < CommonData.Lenght; k++)
                 {
-                    CommonData.PoolCubes[i, k].transform.localScale = new Vector3(+CommonData.skalecoef, +CommonData.skalecoef, +CommonData.skalecoef);
+                    //CommonData.PoolCubes[i, k].transform.localScale = new Vector3(+CommonData.skalecoef, +CommonData.skalecoef, +CommonData.skalecoef);
                     // CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(+CommonData.rotatecoef, +0, +0);
+                    CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(-CommonData.rotatecoef_2, 90, -90);
 
                 }
                 if (CommonData.countforanimation >= 1.2f)
@@ -305,29 +306,62 @@ public class Main : MonoBehaviour
         // if (CommonData.rotatecoef < 355)
         {
             CommonData.rotatecoef += 5;
+            CommonData.rotatecoef_2 += 5;
         }
     }
     void default_position()
     {
+        //for (int i = CommonData.Height - 1; i >= 0; i--)//
+        //{
+        //    for (int k = 0; k < CommonData.Lenght; k++)//
+        //    {
+        //        CommonData.PoolCubes[i, k].transform.localScale = new Vector3(0.3353f, 0.3353f, 0.3353f);//
+        //        CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(-90, 0, 0);
+        //    }
+        //}
+        bool IsOk = false;
         for (int i = CommonData.Height - 1; i >= 0; i--)
         {
             for (int k = 0; k < CommonData.Lenght; k++)
             {
-                CommonData.PoolCubes[i, k].transform.localScale = new Vector3(0.3353f, 0.3353f, 0.3353f);
-                CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(-90, 0, 0);
+                if (CommonData.CommonArr[i, k] > 0)
+                {
+                    IsOk = true;
+                }
+                else
+                {
+                    IsOk = false;
+                    break;
+                }
+            }
+            if (IsOk)
+            {
+                for (int k = 0; k < CommonData.Lenght; k++)
+                {
+
+                    CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(-205, 90, -90);
+
+                }
             }
         }
+
+
+
+
+
+
         CommonData.rotatecoef = 0;
+        CommonData.rotatecoef_2 = 0;
     }
     IEnumerator anim_fall_lines()
     {
-        for (int i = 0; i < 5; i++)
+        // for (int i = 0; i < 5; i++)
         {
-            Debug.Log("in");
-            yield return new WaitForSeconds(1f);
-            if (i == 4)
+
+            yield return new WaitForSeconds(0.5f);
+            //if (i == 4)
             {
-                 CommonData.compressactive = true;
+                CommonData.compressactive = true;
             }
         }
 
@@ -414,7 +448,7 @@ public class BlockController
             {
                 for (int k = 0; k < CommonData.Lenght; k++)
                 {
-                    //CommonData.CommonArr[i, k] = 0;
+                    
                     for (int p = i; p > 0; p--)
                     {
                         CommonData.CommonArr[p, k] = CommonData.CommonArr[p - 1, k];
