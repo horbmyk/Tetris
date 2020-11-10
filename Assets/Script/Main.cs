@@ -6,6 +6,7 @@ using UnityEngine.UI;
 //bluelementrotate
 //Блокувати лишні клавіші
 //music
+// 0.35
 public class Main : MonoBehaviour
 {
     public GameObject CubePrefab;
@@ -50,7 +51,7 @@ public class Main : MonoBehaviour
     }
     void Update()
     {
-
+        Debug.Log(CommonData.timestep);
         if (CommonData.timestep >= 0.35 && CommonData.timestep_Go && CommonData.stepafteranimation)
         {
             Next_Element(blockController);
@@ -355,7 +356,6 @@ public class Main : MonoBehaviour
     {
         for (int i = 0; i < CommonData.Height; i++)
         {
-            //Debug.Log("верх "+i);
             for (int k = 0; k < CommonData.Lenght; k++)
             {
                 if (CommonData.CommonArr[i, k] > 0)
@@ -371,16 +371,21 @@ public class Main : MonoBehaviour
             if (Anim_Full)
             {
 
+
                 yield return new WaitForSeconds(1f);
-                for (int p = 0; p < i; p++)
-                {
-                    for (int k = 0; k < CommonData.Lenght; k++)
-                    {
 
-                        CommonData.PoolCubes[p, k].transform.position = new Vector3(p + 1, 0, k);
+                //for (int p = 0; p < i; p++)
+                //{
 
-                    }
-                }
+                //    for (int k = 0; k < CommonData.Lenght; k++)
+                //    {
+
+
+                //        CommonData.PoolCubes[p, k].transform.position = new Vector3(p + 1, 1f, k);
+
+
+                //    }
+                //}
 
 
 
