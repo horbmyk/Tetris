@@ -28,7 +28,6 @@ public class Element_five : StateBlockTetris
                 cells[i].Y -= 1;
             }
             Casper();
-            CommonData.timestep = 0;
             CommonData.timestep_Go = false;
         }
     }
@@ -45,7 +44,6 @@ public class Element_five : StateBlockTetris
                 cells[i].Y += 1;
             }
             Casper();
-            CommonData.timestep = 0;
             CommonData.timestep_Go = false;
         }
     }

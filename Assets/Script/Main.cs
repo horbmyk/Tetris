@@ -52,7 +52,7 @@ public class Main : MonoBehaviour
     void Update()
     {
         Debug.Log(CommonData.timestep);
-        if (CommonData.timestep >= 0.35 && CommonData.timestep_Go && CommonData.stepafteranimation)
+        if (CommonData.timestep >= 0.2 && CommonData.timestep_Go && CommonData.stepafteranimation)
         {
             Next_Element(blockController);
             ResetPosition();

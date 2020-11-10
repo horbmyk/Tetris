@@ -29,7 +29,6 @@ class Element_seven_State_1 : StateBlockTetris
                 cells[i].Y -= 1;
             }
             Casper();
-            CommonData.timestep = 0;
             CommonData.timestep_Go = false;
         }
     }
@@ -46,7 +45,6 @@ class Element_seven_State_1 : StateBlockTetris
                 cells[i].Y += 1;
             }
             Casper();
-            CommonData.timestep = 0;
             CommonData.timestep_Go = false;
         }
     }
@@ -246,7 +244,6 @@ class Element_seven_State_2 : StateBlockTetris
                 cells[i].Y -= 1;
             }
             Casper();
-            CommonData.timestep = 0;
             CommonData.timestep_Go = false;
         }
     }
@@ -264,7 +261,6 @@ class Element_seven_State_2 : StateBlockTetris
                 cells[i].Y += 1;
             }
             Casper();
-            CommonData.timestep = 0;
             CommonData.timestep_Go = false;
         }
     }

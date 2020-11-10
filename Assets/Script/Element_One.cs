@@ -26,7 +26,6 @@ class Horizontal : StateBlockTetris
                 cells[i].Y -= 1;
             }
             Casper();
-            CommonData.timestep = 0;
             CommonData.timestep_Go = false;
         }
     }
@@ -41,7 +40,6 @@ class Horizontal : StateBlockTetris
                 cells[i].Y += 1;
             }
             Casper();
-            CommonData.timestep = 0;
             CommonData.timestep_Go = false;
         }
     }
@@ -303,7 +301,6 @@ class Vertical : StateBlockTetris
                 cells[i].Y -= 1;
             }
             Casper();
-            CommonData.timestep = 0;
             CommonData.timestep_Go = false;
         }
     }
@@ -322,7 +319,6 @@ class Vertical : StateBlockTetris
                 cells[i].Y += 1;
             }
             Casper();
-            CommonData.timestep = 0;
             CommonData.timestep_Go = false;
         }
     }
