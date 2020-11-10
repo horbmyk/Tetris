@@ -7,6 +7,7 @@ using UnityEngine.UI;
 //Блокувати лишні клавіші
 //music
 // 0.35
+// casper red 
 public class Main : MonoBehaviour
 {
     public GameObject CubePrefab;
@@ -21,6 +22,7 @@ public class Main : MonoBehaviour
     public GameObject Logo_Game_Over;
     public GameObject Logo_Tetris;
     bool Anim_Full;
+    public AudioSource Sound_1;
     void Start()
     {
         CommonData.Logo_GameOver = Logo_Game_Over;
@@ -51,8 +53,7 @@ public class Main : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(CommonData.timestep);
-        if (CommonData.timestep >= 0.2 && CommonData.timestep_Go && CommonData.stepafteranimation)
+        if (CommonData.timestep >= 0.25 && CommonData.timestep_Go && CommonData.stepafteranimation)
         {
             Next_Element(blockController);
             ResetPosition();
@@ -406,7 +407,11 @@ public class Main : MonoBehaviour
 
 
     }
+    public void testsound()
+    {
+        Sound_1.Play();
 
+    }
 
 }
 public class Cell
