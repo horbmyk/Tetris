@@ -5,6 +5,7 @@ using UnityEngine.UI;
 //Cube prefab
 //bluelementrotate
 //Блокувати лишні клавіші
+//music
 public class Main : MonoBehaviour
 {
     public GameObject CubePrefab;
@@ -354,6 +355,7 @@ public class Main : MonoBehaviour
     {
         for (int i = 0; i < CommonData.Height; i++)
         {
+            //Debug.Log("верх "+i);
             for (int k = 0; k < CommonData.Lenght; k++)
             {
                 if (CommonData.CommonArr[i, k] > 0)
@@ -368,7 +370,20 @@ public class Main : MonoBehaviour
             }
             if (Anim_Full)
             {
-                Debug.Log("in");
+
+                yield return new WaitForSeconds(1f);
+                for (int p = 0; p < i; p++)
+                {
+                    for (int k = 0; k < CommonData.Lenght; k++)
+                    {
+
+                        CommonData.PoolCubes[p, k].transform.position = new Vector3(p + 1, 0, k);
+
+                    }
+                }
+
+
+
                 //for (int k = 0; k < CommonData.Lenght; k++)
                 {
                     //for (int p = i; p > 0; p--)
@@ -376,25 +391,13 @@ public class Main : MonoBehaviour
                     //    CommonData.PoolCubes[i, k].transform.position = new Vector3(i + 1, 0, k);//
                     //}
 
-                    yield return new WaitForSeconds(2f);
 
-                    // if (k == CommonData.Lenght - 1)
-                    {
-                    }
                 }
 
             }
         }
-        Anim_Full = false;
+
         CommonData.compressactive = true;
-
-
-
-
-        {
-
-        }
-
 
 
     }
@@ -457,7 +460,6 @@ public class BlockController
     }
     public void CompressLine()
     {
-        Debug.Log("Compress");
         Line = 0;
         Score = 0;
 
