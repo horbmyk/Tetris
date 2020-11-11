@@ -26,6 +26,7 @@ public class Main : MonoBehaviour
     public int Line_table = 0;
     public int Score_table = 0;
     bool IsOk;
+    GameObject Parent_lines;
     void Start()
     {
         CommonData.Logo_GameOver = Logo_Game_Over;
@@ -41,6 +42,7 @@ public class Main : MonoBehaviour
         CommonData.stepafteranimation = true;
         CommonData.CommonArr = new int[CommonData.Height, CommonData.Lenght];
         CommonData.PoolCubes = new GameObject[CommonData.Height, CommonData.Lenght];
+        Parent_lines = new GameObject();
 
         for (int i = 0; i < CommonData.Height; i++)
         {
@@ -283,9 +285,8 @@ public class Main : MonoBehaviour
                     //CommonData.PoolCubes[i, k].transform.localScale = new Vector3(+CommonData.skalecoef, +CommonData.skalecoef, +CommonData.skalecoef);
                     // CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(+CommonData.rotatecoef, +0, +0);
                     CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(-CommonData.rotatecoef_2, 90, -90);
-
                 }
-                if (CommonData.countforanimation >= 1.2f)
+                if (CommonData.countforanimation >= 0.5f)
                 {
                     default_position();
                     CommonData.animation_2_active = true;
@@ -372,45 +373,26 @@ public class Main : MonoBehaviour
                 {
                     Anim_Full = false;
                     break;
+
                 }
+            }
+            if (!Anim_Full)
+            {
+                for (int k = 0; k < CommonData.Lenght; k++)
+                {
+                    CommonData.PoolCubes[i, k].transform.SetParent(Parent_lines.transform);
+                }
+
             }
             if (Anim_Full)
             {
-
-
-                yield return new WaitForSeconds(1f);
-
-                //for (int p = 0; p < i; p++)
-                //{
-
-                //    for (int k = 0; k < CommonData.Lenght; k++)
-                //    {
-
-
-                //        CommonData.PoolCubes[p, k].transform.position = new Vector3(p + 1, 1f, k);
-
-
-                //    }
-                //}
-
-
-
-                //for (int k = 0; k < CommonData.Lenght; k++)
-                {
-                    //for (int p = i; p > 0; p--)
-                    //{
-                    //    CommonData.PoolCubes[i, k].transform.position = new Vector3(i + 1, 0, k);//
-                    //}
-
-
-                }
-
+                yield return new WaitForSeconds(0.5f);
+                Parent_lines.transform.position += new Vector3(1, 0.01f, 0);
             }
         }
-
+        Parent_lines.transform.DetachChildren();
+        Parent_lines.transform.position = new Vector3(0, 0, 0);
         CommonData.compressactive = true;
-
-
     }
     void Sound_Rotation()
     {
@@ -425,6 +407,7 @@ public class Main : MonoBehaviour
         {
             for (int k = 0; k < CommonData.Lenght; k++)
             {
+
                 if (CommonData.CommonArr[i, k] > 0)
                 {
                     IsOk = true;
@@ -441,7 +424,7 @@ public class Main : MonoBehaviour
                 {
                     for (int p = i; p > 0; p--)
                     {
-                        CommonData.CommonArr[p, k] = CommonData.CommonArr[p - 1, k];
+                        CommonData.CommonArr[p, k] = CommonData.CommonArr[p - 1, k];//
                     }
                 }
             }
