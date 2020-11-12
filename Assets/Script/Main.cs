@@ -361,6 +361,7 @@ public class Main : MonoBehaviour
     }
     IEnumerator anim_fall_lines()
     {
+        int CountLines = 0;
         for (int i = 0; i < CommonData.Height; i++)
         {
             for (int k = 0; k < CommonData.Lenght; k++)
@@ -386,10 +387,19 @@ public class Main : MonoBehaviour
             }
             if (Anim_Full)
             {
+                CountLines++;
+                Debug.Log(CountLines);
                 yield return new WaitForSeconds(0.5f);
+                for (int k = 0; k < CommonData.Lenght; k++)
+                {
+                    CommonData.PoolCubes[i, k].transform.position = new Vector3(CountLines-1, 0, k);
+                }
+
+
                 Parent_lines.transform.position += new Vector3(1, 0.01f, 0);
             }
         }
+        CountLines = 0;
         Parent_lines.transform.DetachChildren();
         Parent_lines.transform.position = new Vector3(0, 0, 0);
         CommonData.compressactive = true;
