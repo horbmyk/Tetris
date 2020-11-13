@@ -6,7 +6,6 @@ using UnityEngine.UI;
 //bluelementrotate
 //Блокувати лишні клавіші
 //music
-// 0.35
 // casper red 
 public class Main : MonoBehaviour
 {
@@ -286,7 +285,7 @@ public class Main : MonoBehaviour
                     // CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(+CommonData.rotatecoef, +0, +0);
                     CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(-CommonData.rotatecoef_2, 90, -90);
                 }
-                if (CommonData.countforanimation >= 0.5f)
+                if (CommonData.countforanimation >= 0.25f)
                 {
                     default_position();
                     CommonData.animation_2_active = true;
@@ -388,8 +387,7 @@ public class Main : MonoBehaviour
             if (Anim_Full)
             {
                 CountLines++;
-                Debug.Log(CountLines);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.25f);
                 for (int k = 0; k < CommonData.Lenght; k++)
                 {
                     CommonData.PoolCubes[i, k].transform.position = new Vector3(CountLines-1, 0, k);
