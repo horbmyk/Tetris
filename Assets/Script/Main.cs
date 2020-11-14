@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//casper red 
-//musicл
+//music
 //Блокувати лишні клавіші
 public class Main : MonoBehaviour
 {

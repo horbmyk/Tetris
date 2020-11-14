@@ -957,6 +957,7 @@ public class Element_three_State__4 : StateBlockTetris
         {
             case 1:
                 CommonData.CommonArr[cells[0].X + Count, cells[0].Y] = -1;
+                CommonData.CommonArr[cells[3].X + Count, cells[3].Y] = -1;
                 break;
             case 2:
                 CommonData.CommonArr[cells[0].X + Count, cells[0].Y] = -1;
