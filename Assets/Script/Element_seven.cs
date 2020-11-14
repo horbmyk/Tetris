@@ -137,7 +137,9 @@ class Element_seven_State_1 : StateBlockTetris
     }
     public override void Rotate(BlockController bc)
     {
-        if (CommonData.CommonArr[cells[3].X + 1, cells[3].Y] == 0
+
+        if (cells[0].X < CommonData.Height - 1
+            && CommonData.CommonArr[cells[3].X + 1, cells[3].Y] == 0
             && CommonData.CommonArr[cells[3].X + 2, cells[3].Y] == 0
             && CommonData.CommonArr[cells[0].X - 1, cells[0].Y] == 0)
         {
@@ -164,6 +166,44 @@ class Element_seven_State_1 : StateBlockTetris
             bc.stateBlockTetris = element_seven_State_2;
 
         }
+
+
+
+
+        if (cells[0].X == CommonData.Height - 1
+    && CommonData.CommonArr[cells[0].X - 1, cells[0].Y] == 0
+    && CommonData.CommonArr[cells[0].X - 2, cells[0].Y] == 0
+    && CommonData.CommonArr[cells[2].X - 1, cells[2].Y] == 0)
+        {
+
+            CommonData.CommonArr[cells[0].X - 2, cells[0].Y] = CommonData.CommonArr[cells[0].X, cells[0].Y];
+            CommonData.CommonArr[cells[0].X, cells[0].Y] = 0;
+
+            CommonData.CommonArr[cells[1].X - 1, cells[1].Y - 1] = CommonData.CommonArr[cells[2].X, cells[2].Y];
+            CommonData.CommonArr[cells[1].X, cells[1].Y] = 0;
+
+            CommonData.CommonArr[cells[3].X + 1, cells[3].Y - 1] = CommonData.CommonArr[cells[3].X, cells[3].Y];
+            CommonData.CommonArr[cells[3].X, cells[3].Y] = 0;
+
+
+            cells[0].X -= 2;
+            cells[1].X -= 1;
+            cells[1].Y -= 1;
+            cells[3].X += 1;
+            cells[3].Y -= 1;
+
+
+
+            Cell c_0 = new Cell(cells[0].X, cells[0].Y, 6);
+            Cell c_1 = new Cell(cells[1].X, cells[1].Y, 6);
+            Cell c_2 = new Cell(cells[2].X, cells[2].Y, 6);
+            Cell c_3 = new Cell(cells[3].X, cells[3].Y, 6);
+            Element_seven_State_2 element_seven_State_2 = new Element_seven_State_2(c_0, c_1, c_2, c_3);
+            bc.stateBlockTetris = element_seven_State_2;
+
+        }
+
+
 
     }
     void Casper()
