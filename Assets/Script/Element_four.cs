@@ -872,6 +872,42 @@ public class Element_four_State__4 : StateBlockTetris
     }
     public override void Rotate(BlockController bc)
     {
+        if (cells[0].X == CommonData.Height - 1
+    && CommonData.CommonArr[cells[0].X - 2, cells[0].Y] == 0
+    && CommonData.CommonArr[cells[1].X - 2, cells[1].Y] == 0
+    && CommonData.CommonArr[cells[0].X - 1, cells[0].Y] == 0
+    && CommonData.CommonArr[cells[1].X - 1, cells[1].Y] == 0
+    && CommonData.CommonArr[cells[3].X - 1, cells[3].Y] == 0)
+        {
+            CommonData.CommonArr[cells[3].X - 1, cells[3].Y - 2] = CommonData.CommonArr[cells[3].X, cells[3].Y];
+            CommonData.CommonArr[cells[3].X, cells[3].Y] = 0;
+
+            CommonData.CommonArr[cells[2].X - 2, cells[2].Y - 1] = CommonData.CommonArr[cells[2].X, cells[2].Y];
+            CommonData.CommonArr[cells[2].X, cells[2].Y] = 0;
+
+            CommonData.CommonArr[cells[1].X - 1, cells[1].Y] = CommonData.CommonArr[cells[0].X, cells[0].Y];
+            CommonData.CommonArr[cells[1].X, cells[1].Y] = 0;
+
+            CommonData.CommonArr[cells[0].X, cells[0].Y + 1] = CommonData.CommonArr[cells[0].X, cells[0].Y];
+            CommonData.CommonArr[cells[0].X, cells[0].Y] = 0;
+
+
+            cells[3].Y -= 2;
+            cells[3].X -= 1;
+            cells[2].X -= 2;
+            cells[2].Y -= 1;
+            cells[1].X -= 1;
+            cells[0].Y += 1;
+
+
+            Cell c_0 = new Cell(cells[0].X, cells[0].Y, 4);
+            Cell c_1 = new Cell(cells[1].X, cells[1].Y, 4);
+            Cell c_2 = new Cell(cells[2].X, cells[2].Y, 4);
+            Cell c_3 = new Cell(cells[3].X, cells[3].Y, 4);
+            Element_four_State__1 element_four_State__1 = new Element_four_State__1(c_0, c_1, c_2, c_3);
+            bc.stateBlockTetris = element_four_State__1;
+        }
+
         if (
             CommonData.CommonArr[cells[0].X - 1, cells[0].Y] == 0
             && CommonData.CommonArr[cells[1].X - 1, cells[1].Y] == 0
@@ -899,7 +935,6 @@ public class Element_four_State__4 : StateBlockTetris
             Cell c_3 = new Cell(cells[3].X, cells[3].Y, 4);
             Element_four_State__1 element_four_State__1 = new Element_four_State__1(c_0, c_1, c_2, c_3);
             bc.stateBlockTetris = element_four_State__1;
-
         }
 
     }

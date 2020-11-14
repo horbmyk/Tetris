@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-//Cube prefab
 //bluelementrotate
 //Блокувати лишні клавіші
 //music
-// casper red 
+//casper red 
 public class Main : MonoBehaviour
 {
     public GameObject CubePrefab;
