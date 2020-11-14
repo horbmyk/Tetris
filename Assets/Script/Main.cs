@@ -192,45 +192,45 @@ public class Main : MonoBehaviour
             for (int k = 0; k < CommonData.Lenght; k++)
             {
                 CommonData.PoolCubes[i, k].transform.position = new Vector3(i, 0, k);
-                CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(-90, 0, 0);
+                CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(-90, 0, 0);//
                 if (CommonData.CommonArr[i, k] == 0)
                 {
-                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.white;
+                    //CommonData.PoolCubes[i, k].GetComponent<MeshRenderer>().material.color = Color.gray;
                     CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.gray;
                 }
                 if (CommonData.CommonArr[i, k] == 1)
                 {
-                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.green;
+                    //CommonData.PoolCubes[i, k].GetComponent<MeshRenderer>().material.color = Color.green;
                     CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.green;
                 }
                 if (CommonData.CommonArr[i, k] == 2)
                 {
-                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.blue;
+                    //CommonData.PoolCubes[i, k].GetComponent<MeshRenderer>().material.color = Color.blue;
                     CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.blue;
                 }
                 if (CommonData.CommonArr[i, k] == 3)
                 {
-                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
+                    //CommonData.PoolCubes[i, k].GetComponent<MeshRenderer>().material.color = Color.red;
                     CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.red;
                 }
                 if (CommonData.CommonArr[i, k] == 4)
                 {
-                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
+                    // CommonData.PoolCubes[i, k].GetComponent<MeshRenderer>().material.color = Color.yellow;
                     CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.yellow;
                 }
                 if (CommonData.CommonArr[i, k] == 5)
                 {
-                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
+                    //CommonData.PoolCubes[i, k].GetComponent<MeshRenderer>().material.color = Color.cyan;
                     CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.cyan;
                 }
                 if (CommonData.CommonArr[i, k] == 6)
                 {
-                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
+                    //CommonData.PoolCubes[i, k].GetComponent<MeshRenderer>().material.color = Color.red;
                     CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.red;
                 }
                 if (CommonData.CommonArr[i, k] == -1)
                 {
-                    //CommonData.PoolCubes[p].GetComponent<MeshRenderer>().material.color = Color.red;
+                    //CommonData.PoolCubes[i, k].GetComponent<MeshRenderer>().material.color = Color.white;
                     CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.white;
                 }
             }
@@ -390,7 +390,7 @@ public class Main : MonoBehaviour
                 yield return new WaitForSeconds(0.25f);
                 for (int k = 0; k < CommonData.Lenght; k++)
                 {
-                    CommonData.PoolCubes[i, k].transform.position = new Vector3(CountLines-1, 0, k);
+                    CommonData.PoolCubes[i, k].transform.position = new Vector3(CountLines - 1, 0, k);
                 }
 
 
