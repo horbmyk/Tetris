@@ -49,41 +49,33 @@ public class Hint : MonoBehaviour
 
                 if (CommonData.HintArr[i, k] == 0)
                 {
-                    //PoolCubes_Hint[p].GetComponent<MeshRenderer>().material.color = Color.white;
+
                     PoolCubes_Hint[p].GetComponent<SpriteRenderer>().color = Color.gray;
                 }
                 if (CommonData.HintArr[i, k] == 1)
                 {
-                    // PoolCubes_Hint[p].GetComponent<MeshRenderer>().material.color = Color.green;
                     PoolCubes_Hint[p].GetComponent<SpriteRenderer>().color = Color.green;
                 }
                 if (CommonData.HintArr[i, k] == 2)
                 {
-                    //PoolCubes_Hint[p].GetComponent<MeshRenderer>().material.color = Color.blue;
                     PoolCubes_Hint[p].GetComponent<SpriteRenderer>().color = Color.blue;
                 }
                 if (CommonData.HintArr[i, k] == 3)
                 {
-                    //PoolCubes_Hint[p].GetComponent<MeshRenderer>().material.color = Color.red;
                     PoolCubes_Hint[p].GetComponent<SpriteRenderer>().color = Color.red;
                 }
                 if (CommonData.HintArr[i, k] == 4)
                 {
-                    //PoolCubes_Hint[p].GetComponent<MeshRenderer>().material.color = Color.red;
                     PoolCubes_Hint[p].GetComponent<SpriteRenderer>().color = Color.yellow;
                 }
                 if (CommonData.HintArr[i, k] == 5)
                 {
-                    //PoolCubes_Hint[p].GetComponent<MeshRenderer>().material.color = Color.red;
                     PoolCubes_Hint[p].GetComponent<SpriteRenderer>().color = Color.cyan;
                 }
                 if (CommonData.HintArr[i, k] == 6)
                 {
-                    //PoolCubes_Hint[p].GetComponent<MeshRenderer>().material.color = Color.red;
                     PoolCubes_Hint[p].GetComponent<SpriteRenderer>().color = Color.red;
                 }
-
-
                 p++;
             }
         }

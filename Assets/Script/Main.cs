@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //music
-//Блокувати лишні клавіші
+
 public class Main : MonoBehaviour
 {
     public GameObject CubePrefab;
@@ -20,6 +20,7 @@ public class Main : MonoBehaviour
     public GameObject Logo_Tetris;
     bool Anim_Full;
     public AudioSource Audio_Rotation;
+    public AudioSource Audio_Line_Complite;
     public int Line_table = 0;
     public int Score_table = 0;
     bool IsOk;
@@ -137,7 +138,7 @@ public class Main : MonoBehaviour
             ResetGame(blockController);
             ResetPosition();
         }
-        if (Input.GetKeyDown(KeyCode.Escape))//?
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
         }
@@ -190,45 +191,37 @@ public class Main : MonoBehaviour
             for (int k = 0; k < CommonData.Lenght; k++)
             {
                 CommonData.PoolCubes[i, k].transform.position = new Vector3(i, 0, k);
-                CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(-90, 0, 0);//
+                CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(-90, 0, 0);
                 if (CommonData.CommonArr[i, k] == 0)
                 {
-                    //CommonData.PoolCubes[i, k].GetComponent<MeshRenderer>().material.color = Color.gray;
                     CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.gray;
                 }
                 if (CommonData.CommonArr[i, k] == 1)
                 {
-                    //CommonData.PoolCubes[i, k].GetComponent<MeshRenderer>().material.color = Color.green;
                     CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.green;
                 }
                 if (CommonData.CommonArr[i, k] == 2)
                 {
-                    //CommonData.PoolCubes[i, k].GetComponent<MeshRenderer>().material.color = Color.blue;
                     CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.blue;
                 }
                 if (CommonData.CommonArr[i, k] == 3)
                 {
-                    //CommonData.PoolCubes[i, k].GetComponent<MeshRenderer>().material.color = Color.red;
                     CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.red;
                 }
                 if (CommonData.CommonArr[i, k] == 4)
                 {
-                    // CommonData.PoolCubes[i, k].GetComponent<MeshRenderer>().material.color = Color.yellow;
                     CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.yellow;
                 }
                 if (CommonData.CommonArr[i, k] == 5)
                 {
-                    //CommonData.PoolCubes[i, k].GetComponent<MeshRenderer>().material.color = Color.cyan;
                     CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.cyan;
                 }
                 if (CommonData.CommonArr[i, k] == 6)
                 {
-                    //CommonData.PoolCubes[i, k].GetComponent<MeshRenderer>().material.color = Color.red;
                     CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.red;
                 }
                 if (CommonData.CommonArr[i, k] == -1)
                 {
-                    //CommonData.PoolCubes[i, k].GetComponent<MeshRenderer>().material.color = Color.white;
                     CommonData.PoolCubes[i, k].GetComponent<SpriteRenderer>().color = Color.white;
                 }
             }
@@ -279,8 +272,6 @@ public class Main : MonoBehaviour
                 setanimation();
                 for (int k = 0; k < CommonData.Lenght; k++)
                 {
-                    //CommonData.PoolCubes[i, k].transform.localScale = new Vector3(+CommonData.skalecoef, +CommonData.skalecoef, +CommonData.skalecoef);
-                    // CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(+CommonData.rotatecoef, +0, +0);
                     CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(-CommonData.rotatecoef_2, 90, -90);
                 }
                 if (CommonData.countforanimation >= 0.25f)
@@ -311,7 +302,6 @@ public class Main : MonoBehaviour
                 CommonData.reversforpulse = false;
             }
         }
-        // if (CommonData.rotatecoef < 355)
         {
             CommonData.rotatecoef += 5;
             CommonData.rotatecoef_2 += 5;
@@ -319,11 +309,10 @@ public class Main : MonoBehaviour
     }
     void default_position()
     {
-        for (int i = CommonData.Height - 1; i >= 0; i--)//
+        for (int i = CommonData.Height - 1; i >= 0; i--)
         {
-            for (int k = 0; k < CommonData.Lenght; k++)//
+            for (int k = 0; k < CommonData.Lenght; k++)
             {
-                //CommonData.PoolCubes[i, k].transform.localScale = new Vector3(0.3353f, 0.3353f, 0.3353f);//
                 CommonData.PoolCubes[i, k].transform.eulerAngles = new Vector3(-90, 0, 0);
             }
         }
@@ -430,7 +419,7 @@ public class Main : MonoBehaviour
                 {
                     for (int p = i; p > 0; p--)
                     {
-                        CommonData.CommonArr[p, k] = CommonData.CommonArr[p - 1, k];//
+                        CommonData.CommonArr[p, k] = CommonData.CommonArr[p - 1, k];
                     }
                 }
             }
@@ -504,10 +493,6 @@ public class BlockController
         stateBlockTetris = sbt;
     }
     public StateBlockTetris stateBlockTetris;
-
-
-
-
 
     public void Left()
     {
