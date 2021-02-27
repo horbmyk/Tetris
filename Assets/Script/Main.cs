@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//music
 
 public class Main : MonoBehaviour
 {
@@ -375,6 +374,7 @@ public class Main : MonoBehaviour
             {
                 CountLines++;
                 yield return new WaitForSeconds(0.25f);
+                Sound_Line_Complite();
                 for (int k = 0; k < CommonData.Lenght; k++)
                 {
                     CommonData.PoolCubes[i, k].transform.position = new Vector3(CountLines - 1, 0, k);
@@ -384,7 +384,6 @@ public class Main : MonoBehaviour
                 Parent_lines.transform.position += new Vector3(1, 0.01f, 0);
             }
         }
-        CountLines = 0;
         Parent_lines.transform.DetachChildren();
         Parent_lines.transform.position = new Vector3(0, 0, 0);
         CommonData.compressactive = true;
@@ -392,6 +391,10 @@ public class Main : MonoBehaviour
     void Sound_Rotation()
     {
         Audio_Rotation.Play();
+    }
+    void Sound_Line_Complite()
+    {
+        Audio_Line_Complite.Play();
     }
     public void CompressLine()
     {
