@@ -17,6 +17,7 @@ public class Main : MonoBehaviour
     public Text Level;
     public GameObject Logo_Game_Over;
     public GameObject Logo_Tetris;
+    public GameObject logo_Pause;
     bool Anim_Full;
     public AudioSource Audio_Rotation;
     public AudioSource Audio_Line_Complite;
@@ -26,11 +27,13 @@ public class Main : MonoBehaviour
     GameObject Parent_lines;
     void Start()
     {
+        CommonData.Play = true;
         CommonData.Logo_GameOver = Logo_Game_Over;
         CommonData.Logo_GameOver.SetActive(false);
         CommonData.Logo_Tetris = Logo_Tetris;
         CommonData.Logo_Tetris.SetActive(false);
-        CommonData.Play = true;
+        CommonData.Logo_Pause = logo_Pause;
+        CommonData.Logo_Pause.SetActive(false);
         CommonData.timestep_Go = false;
         CommonData.Tetris_Logo_bool = false;
         CommonData.animation_1_active = false;
@@ -137,9 +140,18 @@ public class Main : MonoBehaviour
             ResetGame(blockController);
             ResetPosition();
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            Application.Quit();
+            if (CommonData.Play)
+            {
+                CommonData.Play = false;
+                CommonData.Logo_Pause.SetActive(true);
+            }
+            else
+            {
+                CommonData.Play = true;
+                CommonData.Logo_Pause.SetActive(false);
+            }
         }
 
         Line.text = "Line " + CommonData.Line;
@@ -230,7 +242,8 @@ public class Main : MonoBehaviour
     {
         bc.stateBlockTetris = nextElement.GeneretedSBT(CommonData.hint.NumberElement);
     }
-    public void ResetGame(BlockController bc)
+
+    void ResetGame(BlockController bc)
     {
         CommonData.Play = true;
         CommonData.CommonArr = new int[CommonData.Height, CommonData.Lenght];

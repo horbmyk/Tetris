@@ -33,6 +33,7 @@ public static class CommonData
     public static Main main;
     public static GameObject Logo_GameOver;
     public static GameObject Logo_Tetris;
+    public static GameObject Logo_Pause;
     public static float timestep;
     public static bool timestep_Go;
     public static float timeforLogoTetris;
